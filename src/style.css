@@ -240,3 +240,36 @@ body {
 #panel {
   grid-area: 1 / 2 / 3 / 3;
 }
+
+@media (max-width: 1280px) {
+  #main-container {
+    grid-template-columns: 30% 65%;
+  }
+}
+
+@media (max-width: 800px) {
+  #main-container {
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    grid-template-rows: 10% auto auto;
+    row-gap: 2vh;
+  }
+
+  #user-info, #user-menu, #panel {
+    border-radius: 0;
+  }
+
+  #user-info {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  #user-menu {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  
+  #panel {
+    grid-area: 3 / 1 / 4 / 2;
+  }
+}
