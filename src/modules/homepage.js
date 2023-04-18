@@ -1,4 +1,6 @@
 export default function loadHome() {
+    document.body.innerHTML = '';
+    
     const navbar = document.createElement('nav');
     const background = document.createElement('div');
     const hero = document.createElement('div');
