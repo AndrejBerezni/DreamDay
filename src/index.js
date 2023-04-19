@@ -9,7 +9,7 @@ import {
   getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
-  signInWithPopup,
+  signInWithRedirect,
   signOut
 } from 'firebase/auth';
 
@@ -41,7 +41,7 @@ const app = initializeApp(firebaseConfig);
 // Firebase Authentication
 async function signIn() {
   const provider = new GoogleAuthProvider();
-  await signInWithPopup(getAuth(), provider);
+  await signInWithRedirect(getAuth(), provider);
 };
 
 function signOutUser() {
