@@ -1,3 +1,7 @@
+import './style.css';
+import loadHome from './modules/homepage';
+import {populateUserInfo, loadUserPage} from './modules/userpage';
+
 // Firebase
 import { initializeApp } from 'firebase/app';
 
@@ -38,6 +42,7 @@ const app = initializeApp(firebaseConfig);
 async function signIn() {
   const provider = new GoogleAuthProvider();
   await signInWithPopup(getAuth(), provider);
+  console.log('hello')
 };
 
 function signOutUser() {
@@ -47,7 +52,9 @@ function signOutUser() {
 function initFirebaseAuth() {
   onAuthStateChanged(getAuth(), user => {
     if (user) {
-      loadUserPage();
+      loadUserPage(populateUserInfo,getProfilePicUrl, getUserName, signOutUser);
+    } else {
+      loadHome(signIn);
     }
   });
 };
@@ -66,10 +73,4 @@ function isUserSignedIn() {
   return !!getAuth().currentUser;
 };
 
-import './style.css';
-import loadHome from './modules/homepage';
-import loadUserPage from './modules/userpage';
 
-
-loadHome(signIn);
-// loadUserPage()
