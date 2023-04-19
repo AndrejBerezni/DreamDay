@@ -97,7 +97,6 @@ time, mark, audio, video {
   --sectionBgTransparent: #d34633d2;
   --sectionTextColor: #F7EACB;
   --sectionTextAccent: #F7C855;
-  --textShadow: 1px 1px 2px black;
 }
 
 body {
@@ -156,7 +155,7 @@ body {
   font-weight: bold;
   color: var(--sectionTextColor);
   transition: .2s;
-  text-shadow: var(--textShadow);
+  text-shadow: 1px 1px 2px black;
 }
 
 #nav-links > button:hover {
@@ -186,7 +185,7 @@ body {
   font-weight: bold;
   color: var(--sectionTextColor);
   font-style: italic;
-  text-shadow: var(--textShadow);
+  text-shadow: 1px 1px 2px black;
 }
 
 #hero-section > p {
@@ -318,4 +317,3 @@ body {
   transform: translateY(2px);
   text-decoration: underline;
 }
-
