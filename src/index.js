@@ -1,3 +1,7 @@
+import './style.css';
+import loadHome from './modules/homepage';
+import {loadUserPage, loadUserInfo} from './modules/userpage';
+
 // Firebase
 import { initializeApp } from 'firebase/app';
 
@@ -47,7 +51,9 @@ function signOutUser() {
 function initFirebaseAuth() {
   onAuthStateChanged(getAuth(), user => {
     if (user) {
-      loadUserPage();
+      loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser);
+    } else {
+      loadHome(signIn);
     }
   });
 };
@@ -66,10 +72,4 @@ function isUserSignedIn() {
   return !!getAuth().currentUser;
 };
 
-import './style.css';
-import loadHome from './modules/homepage';
-import loadUserPage from './modules/userpage';
 
-
-loadHome(signIn);
-// loadUserPage()

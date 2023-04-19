@@ -97,6 +97,7 @@ time, mark, audio, video {
   --sectionBgTransparent: #d34633d2;
   --sectionTextColor: #F7EACB;
   --sectionTextAccent: #F7C855;
+  --textShadow: 1px 1px 2px black;
 }
 
 body {
@@ -155,7 +156,7 @@ body {
   font-weight: bold;
   color: var(--sectionTextColor);
   transition: .2s;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: var(--textShadow);
 }
 
 #nav-links > button:hover {
@@ -185,7 +186,7 @@ body {
   font-weight: bold;
   color: var(--sectionTextColor);
   font-style: italic;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: var(--textShadow)
 }
 
 #hero-section > p {
@@ -272,4 +273,45 @@ body {
   #panel {
     grid-area: 3 / 1 / 4 / 2;
   }
+}
+
+/* User Info Section */
+
+#user-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+
+}
+#profile-pic {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 2px solid var(--sectionTextAccent);
+}
+#user-info-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#user-info-text > h1 {
+  font-family: var(--titleFont);
+  color: var(--sectionTextColor);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: var(--textShadow);
+}
+
+#user-info-text > h2 {
+  font-family: var(--titleFont);
+  color: var(--sectionTextAccent);
+  text-align: end;
+  text-shadow: var(--textShadow);
+  transition: .2s;
+}
+
+#user-info-text > h2:hover {
+  transform: translateY(-2px);
+  color: var(--sectionTextColor);
+  cursor: pointer;
 }
