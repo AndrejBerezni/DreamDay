@@ -279,23 +279,23 @@ body {
 #user-info {
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
   padding: 10px;
   align-items: center;
 }
 
 #profile-picture {
   aspect-ratio: 1/1;
-  height: 100%;
+  height: 80%;
   border-radius: 50%;
   grid-area: 1 / 1 / 3 / 2;
   border: 2px solid var(--sectionTextAccent);
 }
 
 #user-info > h1 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   grid-area: 1 / 2 / 2 / 3;
-  text-align: end;
+  text-align: start;
   font-family: var(--titleFont);
   color: var(--sectionTextColor);
   font-weight: bold;
@@ -317,3 +317,4 @@ body {
   transform: translateY(2px);
   text-decoration: underline;
 }
+
