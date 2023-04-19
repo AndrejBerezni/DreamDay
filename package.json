@@ -28,6 +28,7 @@
     "webpack-dev-server": "^4.13.3"
   },
   "dependencies": {
-    "date-fns": "^2.29.3"
+    "date-fns": "^2.29.3",
+    "firebase": "^9.20.0"
   }
 }
