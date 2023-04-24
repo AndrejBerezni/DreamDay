@@ -27,12 +27,15 @@ import {
   collection,
   addDoc,
   query,
+  where,
   orderBy,
   limit,
   onSnapshot,
   setDoc,
   updateDoc,
   doc,
+  getDocs,
+  getDoc,
   serverTimestamp,
 } from 'firebase/firestore';
 
@@ -62,7 +65,8 @@ function initFirebaseAuth() {
   onAuthStateChanged(getAuth(), user => {
     if (user) {
       loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser, loadUserMenu);
-      console.log(getAuth().currentUser)
+      console.log(`user id is: ${getAuth().currentUser.uid}`);
+      getChaptersForCurrentUser();
     } else {
       loadHome(signIn);
     }
@@ -82,5 +86,17 @@ function getUserName() {
 function isUserSignedIn() {
   return !!getAuth().currentUser;
 };
+
+//Firestore
+
+async function getChaptersForCurrentUser() {
+  const currentUserID = getAuth().currentUser.uid;
+  const q = query(collection(db, 'Chapters'), where('userId', '==', currentUserID));
+  const querySnapshot =  await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, '=>', doc.data());
+  });
+};
+
 
 

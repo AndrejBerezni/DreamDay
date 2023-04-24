@@ -367,5 +367,7 @@ body {
 
 
 #user-menu-chapters-list {
-
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
