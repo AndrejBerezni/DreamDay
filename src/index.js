@@ -1,6 +1,15 @@
 import './style.css';
 import loadHome from './modules/homepage';
-import {loadUserPage, loadUserMenu, loadUserInfo} from './modules/userpage';
+import loadUserPage from './modules/userpage/userpage';
+import loadUserInfo from './modules/userpage/userinfo';
+import loadUserMenu from './modules/userpage/usermenu';
+
+// Font awesome:
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
+import '@fortawesome/fontawesome-free/js/regular';
+import '@fortawesome/fontawesome-free/js/brands';
+
 
 // Firebase
 import { initializeApp } from 'firebase/app';

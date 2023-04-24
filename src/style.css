@@ -315,3 +315,57 @@ body {
   color: var(--sectionTextColor);
   cursor: pointer;
 }
+
+/* User Menu Section */
+
+#user-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  padding: 15px 5px;
+}
+
+.user-menu-div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.user-menu-icon {
+  font-size: calc(1.2vh + 1.2vw);
+  color: var(--sectionTextColor);
+  width: 10%;
+  text-shadow: var(--textShadow);
+  transition: .3s;
+  filter:drop-shadow(var(--textShadow))
+}
+
+.user-menu-button {
+  flex: 1;
+  font-size: calc(1.3vh + 1.3vw);
+  text-align: left;
+  color: var(--sectionTextColor);
+  background: none;
+  border: none;
+  font-family: var(--titleFont);
+  font-weight: bold;
+  text-shadow: var(--textShadow);
+  transition: .2s;
+}
+
+.user-menu-div:hover .user-menu-button {
+  transform: translatex(4px);
+  color: var(--sectionTextAccent);
+  cursor: pointer;
+}
+
+.user-menu-div:hover .user-menu-icon{
+  color: var(--sectionTextAccent);
+  transform: scale(1.1);
+}
+
+
+#user-menu-chapters-list {
+
+}
