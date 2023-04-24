@@ -1,4 +1,4 @@
-export default function loadUserMenu(container) {
+export default function loadUserMenu(container, chapters) {
     const homeButton = document.createElement('button');
     const todayButton = document.createElement('button');
     const thisWeekButton = document.createElement('button');
@@ -35,11 +35,11 @@ export default function loadUserMenu(container) {
     chaptersList.id = ('user-menu-chapters-list');
     chaptersList.classList.toggle('hidden');
 
-    // chapters.forEach(chapter => {
-    //     const chapterElement = document.createElement('button');
-    //     chapterElement.innerText = chapter;
-    //     chapterElement.classList.add('user-menu-chapter')
-    // });
+    chapters.forEach(chapter => {
+        const chapterElement = document.createElement('button');
+        chapterElement.innerText = chapter;
+        chapterElement.classList.add('user-menu-chapter')
+    });
 
     const homeDiv = document.createElement('div');
     const todayDiv = document.createElement('div');

@@ -64,7 +64,8 @@ function signOutUser() {
 function initFirebaseAuth() {
   onAuthStateChanged(getAuth(), user => {
     if (user) {
-      loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser, loadUserMenu);
+      const chapters = getChaptersForCurrentUser()
+      loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser, loadUserMenu, chapters);
       console.log(`user id is: ${getAuth().currentUser.uid}`);
     } else {
       loadHome(signIn);

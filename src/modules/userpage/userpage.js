@@ -1,4 +1,4 @@
-export default function loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOut, loadUserMenu) {
+export default function loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOut, loadUserMenu, chapters) {
     document.body.innerHTML = '';
 
     const mainContainer = document.createElement('main');
@@ -12,7 +12,7 @@ export default function loadUserPage(loadUserInfo, getProfilePicUrl, getUserName
     panel.id = 'panel';
 
     loadUserInfo(userInfo,getProfilePicUrl, getUserName, signOut);
-    loadUserMenu(userMenu);
+    loadUserMenu(userMenu, chapters);
 
     mainContainer.appendChild(userInfo);
     mainContainer.appendChild(userMenu);

@@ -392,5 +392,12 @@ body {
 }
 
 .user-menu-chapter {
-  
+  font-size: calc(1.25vh + 1.25vw);
+  text-align: left;
+  color: var(--sectionTextColor);
+  background: none;
+  border: none;
+  font-family: var(--titleFont);
+  font-weight: bold;
+  text-shadow: var(--textShadow);
 }
