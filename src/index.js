@@ -1,6 +1,6 @@
 import './style.css';
 import loadHome from './modules/homepage';
-import {loadUserPage, loadUserInfo} from './modules/userpage';
+import {loadUserPage, loadUserMenu, loadUserInfo} from './modules/userpage';
 
 // Firebase
 import { initializeApp } from 'firebase/app';
@@ -9,7 +9,7 @@ import {
   getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
-  signInWithRedirect,
+  signInWithPopup,
   signOut
 } from 'firebase/auth';
 
@@ -37,11 +37,12 @@ const firebaseConfig = {
 }; 
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 // Firebase Authentication
 async function signIn() {
   const provider = new GoogleAuthProvider();
-  await signInWithRedirect(getAuth(), provider);
+  await signInWithPopup(getAuth(), provider);
 };
 
 function signOutUser() {
@@ -51,7 +52,8 @@ function signOutUser() {
 function initFirebaseAuth() {
   onAuthStateChanged(getAuth(), user => {
     if (user) {
-      loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser);
+      loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser, loadUserMenu);
+      console.log(getAuth().currentUser)
     } else {
       loadHome(signIn);
     }
