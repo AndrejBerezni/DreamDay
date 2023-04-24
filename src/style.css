@@ -341,8 +341,14 @@ body {
   filter:drop-shadow(var(--textShadow))
 }
 
+.dropdown-icon {
+  margin-left: -15px;
+  align-self: flex-start;
+  font-size: calc(1.4vh + 1.4vw);
+}
+
 .user-menu-button {
-  flex: 1;
+  /* flex: 1; */
   font-size: calc(1.3vh + 1.3vw);
   text-align: left;
   color: var(--sectionTextColor);
@@ -363,11 +369,28 @@ body {
 .user-menu-div:hover .user-menu-icon{
   color: var(--sectionTextAccent);
   transform: scale(1.1);
+  cursor: pointer;
 }
 
+.user-menu-div:hover .dropdown-icon {
+  transform: translatex(4px);
+  cursor: pointer;
+}
 
 #user-menu-chapters-list {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  height: 100px;
+  width: 150px;
+  border: 1px solid black;
+  align-self: center;
+}
+
+#user-menu-chapters-list.hidden {
+  display: none;
+}
+
+.user-menu-chapter {
+  
 }

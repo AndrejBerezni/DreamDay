@@ -66,7 +66,6 @@ function initFirebaseAuth() {
     if (user) {
       loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser, loadUserMenu);
       console.log(`user id is: ${getAuth().currentUser.uid}`);
-      getChaptersForCurrentUser();
     } else {
       loadHome(signIn);
     }
@@ -90,13 +89,17 @@ function isUserSignedIn() {
 //Firestore
 
 async function getChaptersForCurrentUser() {
+  const chaptersArray = []
   const currentUserID = getAuth().currentUser.uid;
   const q = query(collection(db, 'Chapters'), where('userId', '==', currentUserID));
   const querySnapshot =  await getDocs(q);
   querySnapshot.forEach((doc) => {
-    console.log(doc.id, '=>', doc.data());
+    chaptersArray.push(doc.data().name);
   });
+  return chaptersArray
 };
+
+getChaptersForCurrentUser()
 
 
 
