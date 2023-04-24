@@ -64,9 +64,9 @@ function signOutUser() {
 function initFirebaseAuth() {
   onAuthStateChanged(getAuth(), user => {
     if (user) {
-      const chapters = getChaptersForCurrentUser()
-      loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser, loadUserMenu, chapters);
+      loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser, loadUserMenu, getChaptersForCurrentUser);
       console.log(`user id is: ${getAuth().currentUser.uid}`);
+      
     } else {
       loadHome(signIn);
     }
@@ -76,7 +76,7 @@ function initFirebaseAuth() {
 initFirebaseAuth();
 
 function getProfilePicUrl() {
-  return getAuth().currentUser.photoURL || '/images/profile_placeholder.png';
+  return getAuth().currentUser.photoURL
 };
 
 function getUserName() {
@@ -90,17 +90,17 @@ function isUserSignedIn() {
 //Firestore
 
 async function getChaptersForCurrentUser() {
-  const chaptersArray = []
+  let chaptersArray = []
   const currentUserID = getAuth().currentUser.uid;
   const q = query(collection(db, 'Chapters'), where('userId', '==', currentUserID));
   const querySnapshot =  await getDocs(q);
   querySnapshot.forEach((doc) => {
     chaptersArray.push(doc.data().name);
   });
+  console.log(chaptersArray)
   return chaptersArray
 };
 
-getChaptersForCurrentUser()
 
 
 
