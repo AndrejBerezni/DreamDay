@@ -297,7 +297,7 @@ body {
 #user-info-text > h1 {
   font-family: var(--titleFont);
   color: var(--sectionTextColor);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   text-shadow: var(--textShadow);
 }
@@ -341,12 +341,6 @@ body {
   filter:drop-shadow(var(--textShadow))
 }
 
-.dropdown-icon {
-  margin-left: -15px;
-  align-self: flex-start;
-  font-size: calc(1.4vh + 1.4vw);
-}
-
 .user-menu-button {
   /* flex: 1; */
   font-size: calc(1.3vh + 1.3vw);
@@ -360,7 +354,7 @@ body {
   transition: .2s;
 }
 
-.user-menu-div:hover .user-menu-button {
+.user-menu-div:hover .user-menu-button, .user-menu-chapter:hover {
   transform: translatex(4px);
   color: var(--sectionTextAccent);
   cursor: pointer;
@@ -396,4 +390,5 @@ body {
   font-family: var(--titleFont);
   font-weight: bold;
   text-shadow: var(--textShadow);
+  transition: .2s;
 }

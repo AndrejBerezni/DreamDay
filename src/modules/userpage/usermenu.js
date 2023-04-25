@@ -1,95 +1,89 @@
-export default async function loadUserMenu(container, getChaptersForCurrentUser) {
-    const homeButton = document.createElement('button');
-    const todayButton = document.createElement('button');
-    const thisWeekButton = document.createElement('button');
-    const chaptersButton = document.createElement('button');
-    const notesButton = document.createElement('button');
+export default async function loadUserMenu(
+  container,
+  getChaptersForCurrentUser
+) {
+  const homeButton = document.createElement("button");
+  const todayButton = document.createElement("button");
+  const thisWeekButton = document.createElement("button");
+  const chaptersButton = document.createElement("button");
+  const notesButton = document.createElement("button");
 
-    const homeIcon = document.createElement('icon');
-    const todayIcon = document.createElement('icon');
-    const thisWeekIcon = document.createElement('icon');
-    const chaptersIcon = document.createElement('icon');
-    const chaptersDropdownIcon = document.createElement('icon');
-    const notesIcon = document.createElement('icon');
+  const homeIcon = document.createElement("icon");
+  const todayIcon = document.createElement("icon");
+  const thisWeekIcon = document.createElement("icon");
+  const chaptersIcon = document.createElement("icon");
+  const chaptersDropdownIcon = document.createElement("icon");
+  const notesIcon = document.createElement("icon");
 
-    homeButton.classList.add('user-menu-button');
-    todayButton.classList.add('user-menu-button');
-    thisWeekButton.classList.add('user-menu-button');
-    chaptersButton.classList.add('user-menu-button');
-    notesButton.classList.add('user-menu-button');
-  
-    homeButton.innerText = 'HOME'
-    todayButton.innerText = 'Today'
-    thisWeekButton.innerText = 'This Week'
-    chaptersButton.innerText = 'Chapters'
-    notesButton.innerText = 'Notes'
+  homeButton.classList.add("user-menu-button");
+  todayButton.classList.add("user-menu-button");
+  thisWeekButton.classList.add("user-menu-button");
+  chaptersButton.classList.add("user-menu-button");
+  notesButton.classList.add("user-menu-button");
 
-    homeIcon.classList.add('user-menu-icon', 'fas', 'fa-home');
-    todayIcon.classList.add('user-menu-icon', 'far', 'fa-calendar-check');
-    thisWeekIcon.classList.add('user-menu-icon', 'far', 'fa-calendar-alt');
-    chaptersIcon.classList.add('user-menu-icon', 'fas', 'fa-book');
-    chaptersDropdownIcon.classList.add('user-menu-icon', 'fas', 'fa-sort-down', 'dropdown-icon')
-    notesIcon.classList.add('user-menu-icon', 'far', 'fa-sticky-note');
+  homeButton.innerText = "Home";
+  todayButton.innerText = "Today";
+  thisWeekButton.innerText = "This Week";
+  chaptersButton.innerText = "Chapters";
+  notesButton.innerText = "Notes";
 
-    const chaptersList = document.createElement('div');
-    chaptersList.id = ('user-menu-chapters-list');
-    chaptersList.classList.toggle('hidden');
+  homeIcon.classList.add("user-menu-icon", "fas", "fa-home");
+  todayIcon.classList.add("user-menu-icon", "far", "fa-calendar-check");
+  thisWeekIcon.classList.add("user-menu-icon", "far", "fa-calendar-alt");
+  chaptersIcon.classList.add("user-menu-icon", "fas", "fa-tags");
+  notesIcon.classList.add("user-menu-icon", "far", "fa-sticky-note");
 
-    const chapters = await getChaptersForCurrentUser();
+  const chaptersList = document.createElement("div");
+  chaptersList.id = "user-menu-chapters-list";
+  chaptersList.classList.toggle("hidden");
 
-    for (let i = 0; i < chapters.length; i ++) {
-        const chapterElement = document.createElement('button');
-        chapterElement.innerText = chapters[i];
-        chapterElement.classList.add('user-menu-chapter');
-        console.log(chapters[i]);
-        chaptersList.appendChild(chapterElement);
-    }
+  const chapters = await getChaptersForCurrentUser();
 
-    // chapters.forEach(element => {
-    //     const chapterElement = document.createElement('button');
-    //     chapterElement.innerText = element;
-    //     chapterElement.classList.add('user-menu-chapter');
-    //     console.log(element);
-    //     chaptersList.appendChild(chapterElement);
-    // });
+  chapters.forEach((element) => {
+    const chapterElement = document.createElement("button");
+    chapterElement.innerText = element;
+    chapterElement.classList.add("user-menu-chapter");
+    chaptersList.appendChild(chapterElement);
+  });
 
+  const homeDiv = document.createElement("div");
+  const todayDiv = document.createElement("div");
+  const thisWeekDiv = document.createElement("div");
+  const chaptersDiv = document.createElement("div");
+  const notesDiv = document.createElement("div");
 
-    const homeDiv = document.createElement('div');
-    const todayDiv = document.createElement('div');
-    const thisWeekDiv = document.createElement('div');
-    const chaptersDiv = document.createElement('div');
-    const notesDiv = document.createElement('div');
+  homeDiv.classList.add("user-menu-div");
+  todayDiv.classList.add("user-menu-div");
+  thisWeekDiv.classList.add("user-menu-div");
+  chaptersDiv.classList.add("user-menu-div");
+  notesDiv.classList.add("user-menu-div");
 
-    homeDiv.classList.add('user-menu-div');
-    todayDiv.classList.add('user-menu-div');
-    thisWeekDiv.classList.add('user-menu-div');
-    chaptersDiv.classList.add('user-menu-div');
-    notesDiv.classList.add('user-menu-div');
+  chaptersDiv.addEventListener("click", () => {
+    chaptersList.classList.toggle("hidden");
+    chaptersIcon.classList.remove("fa-angle-right");
+    chaptersIcon.classList.add("fa-angle-down");
+  });
 
-    chaptersDiv.addEventListener('click', ()=> {
-        chaptersList.classList.toggle('hidden');
-    })
+  homeDiv.appendChild(homeIcon);
+  homeDiv.appendChild(homeButton);
 
-    homeDiv.appendChild(homeIcon);
-    homeDiv.appendChild(homeButton);
+  todayDiv.appendChild(todayIcon);
+  todayDiv.appendChild(todayButton);
 
-    todayDiv.appendChild(todayIcon);
-    todayDiv.appendChild(todayButton);
+  thisWeekDiv.appendChild(thisWeekIcon);
+  thisWeekDiv.appendChild(thisWeekButton);
 
-    thisWeekDiv.appendChild(thisWeekIcon);
-    thisWeekDiv.appendChild(thisWeekButton);
+  chaptersDiv.appendChild(chaptersIcon);
+  chaptersDiv.appendChild(chaptersButton);
+  chaptersDiv.appendChild(chaptersDropdownIcon);
 
-    chaptersDiv.appendChild(chaptersIcon);
-    chaptersDiv.appendChild(chaptersButton);
-    chaptersDiv.appendChild(chaptersDropdownIcon);
+  notesDiv.appendChild(notesIcon);
+  notesDiv.appendChild(notesButton);
 
-    notesDiv.appendChild(notesIcon);
-    notesDiv.appendChild(notesButton);
-
-    container.appendChild(homeDiv);
-    container.appendChild(todayDiv);
-    container.appendChild(thisWeekDiv);
-    container.appendChild(chaptersDiv);
-    container.appendChild(chaptersList);
-    container.appendChild(notesDiv);
+  container.appendChild(homeDiv);
+  container.appendChild(todayDiv);
+  container.appendChild(thisWeekDiv);
+  container.appendChild(chaptersDiv);
+  container.appendChild(chaptersList);
+  container.appendChild(notesDiv);
 }

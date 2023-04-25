@@ -1,26 +1,25 @@
-import './style.css';
-import loadHome from './modules/homepage';
-import loadUserPage from './modules/userpage/userpage';
-import loadUserInfo from './modules/userpage/userinfo';
-import loadUserMenu from './modules/userpage/usermenu';
+import "./style.css";
+import loadHome from "./modules/homepage/homepage";
+import loadUserPage from "./modules/userpage/userpage";
+import loadUserInfo from "./modules/userpage/userinfo";
+import loadUserMenu from "./modules/userpage/usermenu";
 
 // Font awesome:
-import '@fortawesome/fontawesome-free/js/fontawesome';
-import '@fortawesome/fontawesome-free/js/solid';
-import '@fortawesome/fontawesome-free/js/regular';
-import '@fortawesome/fontawesome-free/js/brands';
-
+import "@fortawesome/fontawesome-free/js/fontawesome";
+import "@fortawesome/fontawesome-free/js/solid";
+import "@fortawesome/fontawesome-free/js/regular";
+import "@fortawesome/fontawesome-free/js/brands";
 
 // Firebase
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 
 import {
   getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
-  signOut
-} from 'firebase/auth';
+  signOut,
+} from "firebase/auth";
 
 import {
   getFirestore,
@@ -37,7 +36,7 @@ import {
   getDocs,
   getDoc,
   serverTimestamp,
-} from 'firebase/firestore';
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAW2gYDPWui37zgOmY8jgsb__StblMz2zs",
@@ -45,8 +44,8 @@ const firebaseConfig = {
   projectId: "dream-day-658b0",
   storageBucket: "dream-day-658b0.appspot.com",
   messagingSenderId: "58217787175",
-  appId: "1:58217787175:web:2c42d044802d763a070302"
-}; 
+  appId: "1:58217787175:web:2c42d044802d763a070302",
+};
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -55,52 +54,72 @@ const db = getFirestore(app);
 async function signIn() {
   const provider = new GoogleAuthProvider();
   await signInWithPopup(getAuth(), provider);
-};
+}
 
 function signOutUser() {
   signOut(getAuth());
-};
+}
 
 function initFirebaseAuth() {
-  onAuthStateChanged(getAuth(), user => {
+  onAuthStateChanged(getAuth(), (user) => {
     if (user) {
-      loadUserPage(loadUserInfo, getProfilePicUrl, getUserName, signOutUser, loadUserMenu, getChaptersForCurrentUser);
+      loadUserPage(
+        loadUserInfo,
+        getProfilePicUrl,
+        getUserName,
+        signOutUser,
+        loadUserMenu,
+        getChaptersForCurrentUser
+      );
       console.log(`user id is: ${getAuth().currentUser.uid}`);
-      
+      getTasksForCurrentUser();
     } else {
       loadHome(signIn);
     }
   });
-};
+}
 
 initFirebaseAuth();
 
 function getProfilePicUrl() {
-  return getAuth().currentUser.photoURL
-};
+  return getAuth().currentUser.photoURL;
+}
 
 function getUserName() {
   return getAuth().currentUser.displayName;
-};
+}
 
 function isUserSignedIn() {
   return !!getAuth().currentUser;
-};
+}
 
 //Firestore
 
 async function getChaptersForCurrentUser() {
-  let chaptersArray = []
+  let chaptersArray = [];
   const currentUserID = getAuth().currentUser.uid;
-  const q = query(collection(db, 'Chapters'), where('userId', '==', currentUserID));
-  const querySnapshot =  await getDocs(q);
+  const q = query(
+    collection(db, "Chapters"),
+    where("userId", "==", currentUserID)
+  );
+  const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     chaptersArray.push(doc.data().name);
   });
-  console.log(chaptersArray)
-  return chaptersArray
-};
+  return chaptersArray;
+}
 
-
-
-
+async function getTasksForCurrentUser() {
+  let tasksArray = [];
+  const currentUserID = await getAuth().currentUser.uid;
+  const q = query(
+    collection(db, "Tasks"),
+    where("userId", "==", currentUserID)
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    tasksArray.push(doc.data());
+    console.log(doc.data())
+  });
+  return tasksArray;
+}
