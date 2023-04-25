@@ -9,6 +9,7 @@ export default function generateTaskElement(task, container) {
 
 
     const titleDateDiv = document.createElement('div');
+    titleDateDiv.classList.add('title-date-div');
 
     const taskTitle = document.createElement('h1');
     const taskDescription = document.createElement('p');
@@ -22,7 +23,7 @@ export default function generateTaskElement(task, container) {
     const taskEdit = document.createElement('icon');
     const taskDelete = document.createElement('icon');
 
-    if (task.taskComplete) {
+    if (task.complete) {
         taskComplete.classList.add('far', 'fa-check-square');
     } else {
         taskComplete.classList.add('far', 'fa-square');
