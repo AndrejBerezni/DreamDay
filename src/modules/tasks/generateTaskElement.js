@@ -1,4 +1,4 @@
-export default function generateTaskElement(taks, container) {
+export default function generateTaskElement(task, container) {
     const taskDiv = document.createElement('div');
     const taskDivLeft = document.createElement('div');
     const taskDivRight = document.createElement('div');
@@ -15,8 +15,8 @@ export default function generateTaskElement(taks, container) {
     const taskDate = document.createElement('h2');
 
     taskTitle.innerText = task.title;
-    taskDescription.innerText = task.taskDescription;
-    taskDate.innerText = task.dueDate;
+    taskDescription.innerText = task.description;
+    taskDate.innerText = task.dueDate.toDate().toDateString();
 
     const taskComplete = document.createElement('icon');
     const taskEdit = document.createElement('icon');
