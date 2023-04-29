@@ -411,8 +411,8 @@ body {
 }
 
 .task-div:hover {
-  transform: translatex(3px);
-  box-shadow: -5px 0px 2px var(--sectionTextAccent);
+  transform: translateY(-3px);
+  box-shadow: 0px 2px 2px var(--sectionTextAccent);
   /* border-radius: 0px 5px 5px 0px; */
 }
 

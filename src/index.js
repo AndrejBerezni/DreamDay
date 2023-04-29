@@ -77,6 +77,8 @@ function initFirebaseAuth() {
         generateTaskElement
       );
       console.log(`user id is: ${getAuth().currentUser.uid}`);
+      getTodaysTasksForCurrentUser();
+      getThisWeeksTasksForCurrentUser();
 
     } else {
       loadHome(signIn);
@@ -124,7 +126,46 @@ async function getTasksForCurrentUser() {
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     tasksArray.push(doc.data());
-    console.log(doc.data())
   });
   return tasksArray;
-}
+};
+
+// Variables to use in functions to get tasks for today and current week
+const today = new Date();
+const dayOfWeek = today.getDay();
+const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+const tomorrow = new Date(startOfToday.getTime() + 24 * 60 * 60 * 1000);
+const startOfWeek = new Date(today.getTime() - (dayOfWeek - 1) * 24 * 60 * 60 * 1000);
+const endOfWeek = new Date(today.getTime() + (7 - dayOfWeek) * 24 * 60 * 60 * 1000);
+
+async function getTodaysTasksForCurrentUser() {
+  let tasksArray = [];
+  const currentUserID = await getAuth().currentUser.uid;
+  const q = query(
+    collection(db, "Tasks"),
+    where("userId", "==", currentUserID),
+    where("dueDate", ">=", startOfToday),
+    where("dueDate", "<", tomorrow)
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    tasksArray.push(doc.data());
+  });
+  return tasksArray;
+};
+
+async function getThisWeeksTasksForCurrentUser() {
+  let tasksArray = [];
+  const currentUserID = await getAuth().currentUser.uid;
+  const q = query(
+    collection(db, "Tasks"),
+    where("userId", "==", currentUserID),
+    where("dueDate", ">=", startOfWeek),
+    where("dueDate", "<", endOfWeek)
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    tasksArray.push(doc.data());
+  });
+  return tasksArray;
+};
