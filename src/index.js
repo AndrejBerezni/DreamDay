@@ -79,6 +79,7 @@ function initFirebaseAuth() {
         getThisWeeksTasksForCurrentUser
       );
       console.log(`user id is: ${getAuth().currentUser.uid}`);
+      console.log(`Wstart: ${startOfWeek}, Wend: ${endOfWeek}`)
 
     } else {
       loadHome(signIn);

@@ -370,11 +370,6 @@ body {
   cursor: pointer;
 }
 
-.user-menu-div:hover .dropdown-icon {
-  transform: translatex(4px);
-  cursor: pointer;
-}
-
 #user-menu-chapters-list {
   display: flex;
   flex-direction: column;
@@ -397,7 +392,7 @@ body {
   transition: .2s;
 }
 
-/* Home tab */
+/* Tasks */
 
 .task-div {
   margin-bottom: 1vh;
@@ -412,8 +407,7 @@ body {
 
 .task-div:hover {
   transform: translateY(-3px);
-  box-shadow: 0px 2px 2px var(--sectionTextAccent);
-  /* border-radius: 0px 5px 5px 0px; */
+  box-shadow: 0px 2px 2px var(--sectionBg);
 }
 
 .task-div-left {
@@ -467,4 +461,17 @@ body {
   flex-wrap: wrap;
   gap: 1vw;
   align-items: baseline;
+}
+
+/* Panel */
+
+#panel > h1 {
+  font-size: calc( 2vh + 2vw);
+  text-align: center;
+  margin-bottom: 2vh;
+  font-weight: bold;
+  font-family: var(--titleFont);
+  color: var(--sectionTextColor);
+  text-shadow: var(--textShadow);
+
 }

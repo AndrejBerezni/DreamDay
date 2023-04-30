@@ -70,18 +70,26 @@ export default async function loadUserMenu(
     chaptersIcon.classList.add("fa-angle-down");
   });
 
+  function addTitleToSection(title, container) {
+    const titleElement = document.createElement('h1');
+    titleElement.innerText = title;
+    container.appendChild(titleElement);
+  }
   homeDiv.addEventListener('click', async () => {
-    panel.innerHTML = ''
+    panel.innerHTML = '';
+    addTitleToSection('All Tasks', panel);
     await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement)
   });
 
   todayDiv.addEventListener('click', async () => {
-    panel.innerHTML = ''
+    panel.innerHTML = '';
+    addTitleToSection("Today's Tasks", panel);
     await loadTodaysTasks(panel, getTodaysTasksForCurrentUser, generateTaskElement)
   });
 
   thisWeekDiv.addEventListener('click', async () => {
-    panel.innerHTML = ''
+    panel.innerHTML = '';
+    addTitleToSection('This Week', panel);
     await loadThisWeeksTasks(panel, getThisWeeksTasksForCurrentUser, generateTaskElement)
   });
 

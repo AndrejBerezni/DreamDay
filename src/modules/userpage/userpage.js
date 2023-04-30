@@ -17,11 +17,16 @@ export default function loadUserPage(
   const userInfo = document.createElement("div");
   const userMenu = document.createElement("div");
   const panel = document.createElement("div");
+  const title = document.createElement("h1");
+
+  title.innerText = 'All Tasks'
 
   mainContainer.id = "main-container";
   userInfo.id = "user-info";
   userMenu.id = "user-menu";
   panel.id = "panel";
+
+  panel.appendChild(title);
 
   loadUserInfo(userInfo, getProfilePicUrl, getUserName, signOut);
   loadUserMenu(userMenu, getChaptersForCurrentUser, panel, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser);
