@@ -8,7 +8,8 @@ export default function loadUserPage(
   loadAllTasks,
   getTasksForCurrentUser,
   generateTaskElement,
-  getTodaysTasksForCurrentUser
+  getTodaysTasksForCurrentUser,
+  getThisWeeksTasksForCurrentUser
 ) {
   document.body.innerHTML = "";
 
@@ -23,7 +24,7 @@ export default function loadUserPage(
   panel.id = "panel";
 
   loadUserInfo(userInfo, getProfilePicUrl, getUserName, signOut);
-  loadUserMenu(userMenu, getChaptersForCurrentUser, panel, getTodaysTasksForCurrentUser, generateTaskElement);
+  loadUserMenu(userMenu, getChaptersForCurrentUser, panel, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser);
   loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement)
 
   mainContainer.appendChild(userInfo);

@@ -1,12 +1,13 @@
 import generateTaskElement from "../tasks/generateTaskElement";
-import { loadTodaysTasks } from "../tasks/loadAllTasks";
+import { loadAllTasks, loadTodaysTasks, loadThisWeeksTasks } from "../tasks/loadAllTasks";
 
 export default async function loadUserMenu(
   container,
   getChaptersForCurrentUser,
   panel,
+  getTasksForCurrentUser,
   getTodaysTasksForCurrentUser,
-  generateTaskElement
+  getThisWeeksTasksForCurrentUser
 ) {
   const homeButton = document.createElement("button");
   const todayButton = document.createElement("button");
@@ -69,9 +70,20 @@ export default async function loadUserMenu(
     chaptersIcon.classList.add("fa-angle-down");
   });
 
+  homeDiv.addEventListener('click', async () => {
+    panel.innerHTML = ''
+    await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement)
+  });
+
   todayDiv.addEventListener('click', async () => {
+    panel.innerHTML = ''
     await loadTodaysTasks(panel, getTodaysTasksForCurrentUser, generateTaskElement)
-  })
+  });
+
+  thisWeekDiv.addEventListener('click', async () => {
+    panel.innerHTML = ''
+    await loadThisWeeksTasks(panel, getThisWeeksTasksForCurrentUser, generateTaskElement)
+  });
 
   homeDiv.appendChild(homeIcon);
   homeDiv.appendChild(homeButton);

@@ -75,7 +75,8 @@ function initFirebaseAuth() {
         loadAllTasks,
         getTasksForCurrentUser,
         generateTaskElement,
-        getTodaysTasksForCurrentUser
+        getTodaysTasksForCurrentUser,
+        getThisWeeksTasksForCurrentUser
       );
       console.log(`user id is: ${getAuth().currentUser.uid}`);
 
