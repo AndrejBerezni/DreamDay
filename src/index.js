@@ -3,7 +3,7 @@ import loadHome from "./modules/homepage/homepage";
 import loadUserPage from "./modules/userpage/userpage";
 import loadUserInfo from "./modules/userpage/userinfo";
 import loadUserMenu from "./modules/userpage/usermenu";
-import loadAllTasks from "./modules/tasks/loadAllTasks";
+import {loadAllTasks, loadTodaysTasks} from "./modules/tasks/loadAllTasks";
 import generateTaskElement from "./modules/tasks/generateTaskElement";
 
 // Font awesome:
@@ -74,11 +74,10 @@ function initFirebaseAuth() {
         getChaptersForCurrentUser,
         loadAllTasks,
         getTasksForCurrentUser,
-        generateTaskElement
+        generateTaskElement,
+        getTodaysTasksForCurrentUser
       );
       console.log(`user id is: ${getAuth().currentUser.uid}`);
-      getTodaysTasksForCurrentUser();
-      getThisWeeksTasksForCurrentUser();
 
     } else {
       loadHome(signIn);

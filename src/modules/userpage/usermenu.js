@@ -1,6 +1,12 @@
+import generateTaskElement from "../tasks/generateTaskElement";
+import { loadTodaysTasks } from "../tasks/loadAllTasks";
+
 export default async function loadUserMenu(
   container,
-  getChaptersForCurrentUser
+  getChaptersForCurrentUser,
+  panel,
+  getTodaysTasksForCurrentUser,
+  generateTaskElement
 ) {
   const homeButton = document.createElement("button");
   const todayButton = document.createElement("button");
@@ -12,7 +18,6 @@ export default async function loadUserMenu(
   const todayIcon = document.createElement("icon");
   const thisWeekIcon = document.createElement("icon");
   const chaptersIcon = document.createElement("icon");
-  const chaptersDropdownIcon = document.createElement("icon");
   const notesIcon = document.createElement("icon");
 
   homeButton.classList.add("user-menu-button");
@@ -64,6 +69,10 @@ export default async function loadUserMenu(
     chaptersIcon.classList.add("fa-angle-down");
   });
 
+  todayDiv.addEventListener('click', async () => {
+    await loadTodaysTasks(panel, getTodaysTasksForCurrentUser, generateTaskElement)
+  })
+
   homeDiv.appendChild(homeIcon);
   homeDiv.appendChild(homeButton);
 
@@ -75,7 +84,6 @@ export default async function loadUserMenu(
 
   chaptersDiv.appendChild(chaptersIcon);
   chaptersDiv.appendChild(chaptersButton);
-  chaptersDiv.appendChild(chaptersDropdownIcon);
 
   notesDiv.appendChild(notesIcon);
   notesDiv.appendChild(notesButton);
