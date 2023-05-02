@@ -467,6 +467,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2vh;
 }
 
 #title-buttons {
@@ -497,10 +498,67 @@ body {
 #title-container > h1 {
   font-size: calc( 2vh + 2vw);
   text-align: center;
-  margin-bottom: 2vh;
   font-weight: bold;
   font-family: var(--titleFont);
   color: var(--sectionTextColor);
   text-shadow: var(--textShadow);
+}
 
+@media (max-width: 800px) {
+  #title-container {
+    flex-direction: column;
+  }
+
+  #title-container > h1 {
+    margin-bottom: 1.5vh;
+  }
+}
+
+/* Task Form */
+
+#task-form {
+  position: fixed;
+  top: 20%;
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sectionTextColor);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px black;
+  max-width: 90%;
+}
+
+#task-form > h1 {
+  text-align: center;
+  font-family: var(--titleFont);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+#task-form > label {
+  font-family: var(--textFont);
+  margin-bottom: 0.5vh;
+}
+
+#task-form > input, textarea, select {
+  margin-bottom: 2vh;
+  font-size: 1.1rem;
+}
+
+#task-form > button {
+  font-family: var(--titleFont);
+  font-size: 1.3rem;
+  border: none;
+  background-color: transparent;
+  transition: .3s;
+  font-weight: bold;
+  margin-top: 3vh;
+}
+
+#task-form > button:hover {
+  transform: translateY(-2px) scale(1.05);
+  color: var(--sectionBg);
+  cursor: pointer;
+  text-decoration: underline;
 }

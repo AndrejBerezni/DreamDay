@@ -5,6 +5,7 @@ import loadUserInfo from "./modules/userpage/userinfo";
 import loadUserMenu from "./modules/userpage/usermenu";
 import {loadAllTasks, loadTodaysTasks} from "./modules/tasks/loadAllTasks";
 import generateTaskElement from "./modules/tasks/generateTaskElement";
+import generateTaskForm from "./modules/tasks/taskForm";
 
 // Font awesome:
 import "@fortawesome/fontawesome-free/js/fontawesome";
@@ -78,8 +79,6 @@ function initFirebaseAuth() {
         getTodaysTasksForCurrentUser,
         getThisWeeksTasksForCurrentUser
       );
-      console.log(`user id is: ${getAuth().currentUser.uid}`);
-      console.log(`Wstart: ${startOfWeek}, Wend: ${endOfWeek}`)
 
     } else {
       loadHome(signIn);
