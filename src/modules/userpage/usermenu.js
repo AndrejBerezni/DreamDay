@@ -1,5 +1,6 @@
 import generateTaskElement from "../tasks/generateTaskElement";
 import { loadAllTasks, loadTodaysTasks, loadThisWeeksTasks } from "../tasks/loadAllTasks";
+import { addTitleToSection } from "./panelheader";
 
 export default async function loadUserMenu(
   container,
@@ -70,11 +71,6 @@ export default async function loadUserMenu(
     chaptersIcon.classList.add("fa-angle-down");
   });
 
-  function addTitleToSection(title, container) {
-    const titleElement = document.createElement('h1');
-    titleElement.innerText = title;
-    container.appendChild(titleElement);
-  }
   homeDiv.addEventListener('click', async () => {
     panel.innerHTML = '';
     addTitleToSection('All Tasks', panel);
