@@ -1,15 +1,15 @@
 import { addTitleToSection } from "./panelheader";
+import loadUserInfo from "./userinfo";
+import loadUserMenu from "./usermenu";
+import { loadAllTasks } from "../tasks/loadAllTasks";
+import generateTaskElement from "../tasks/generateTaskElement";
 
 export default function loadUserPage(
-  loadUserInfo,
   getProfilePicUrl,
   getUserName,
   signOut,
-  loadUserMenu,
   getChaptersForCurrentUser,
-  loadAllTasks,
   getTasksForCurrentUser,
-  generateTaskElement,
   getTodaysTasksForCurrentUser,
   getThisWeeksTasksForCurrentUser
 ) {

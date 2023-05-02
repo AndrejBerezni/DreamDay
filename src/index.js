@@ -67,15 +67,11 @@ function initFirebaseAuth() {
   onAuthStateChanged(getAuth(), (user) => {
     if (user) {
       loadUserPage(
-        loadUserInfo,
         getProfilePicUrl,
         getUserName,
         signOutUser,
-        loadUserMenu,
         getChaptersForCurrentUser,
-        loadAllTasks,
         getTasksForCurrentUser,
-        generateTaskElement,
         getTodaysTasksForCurrentUser,
         getThisWeeksTasksForCurrentUser
       );
