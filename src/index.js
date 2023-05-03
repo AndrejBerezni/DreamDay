@@ -5,7 +5,7 @@ import loadUserInfo from "./modules/userpage/userinfo";
 import loadUserMenu from "./modules/userpage/usermenu";
 import {loadAllTasks, loadTodaysTasks} from "./modules/tasks/loadAllTasks";
 import generateTaskElement from "./modules/tasks/generateTaskElement";
-import generateTaskForm from "./modules/tasks/taskForm";
+import {addTaskForm} from "./modules/tasks/taskForm";
 
 // Font awesome:
 import "@fortawesome/fontawesome-free/js/fontawesome";
@@ -39,6 +39,7 @@ import {
   getDocs,
   getDoc,
   serverTimestamp,
+  Timestamp
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -75,7 +76,7 @@ function initFirebaseAuth() {
         getTodaysTasksForCurrentUser,
         getThisWeeksTasksForCurrentUser
       );
-
+        // addTaskForm(handleTask);
     } else {
       loadHome(signIn);
     }
@@ -97,6 +98,7 @@ function isUserSignedIn() {
 }
 
 //Firestore
+// Get data
 
 async function getChaptersForCurrentUser() {
   let chaptersArray = [];
@@ -165,3 +167,22 @@ async function getThisWeeksTasksForCurrentUser() {
   });
   return tasksArray;
 };
+
+// Write data
+
+/*According to the Firebase documentation, if document already exists,
+it will be overwritten, which means that this function can work for both
+add and edit task functionalities */
+
+async function handleTask(task) {
+  const timestamp = Timestamp.fromDate(new Date(task.dueDate));
+
+  await setDoc(doc(db, 'Tasks', task.title), {
+    userId: await getAuth().currentUser.uid,
+    title: task.title,
+    description: task.description,
+    priority: task.priority,
+    dueDate: timestamp,
+    complete: task.complete
+  });
+}

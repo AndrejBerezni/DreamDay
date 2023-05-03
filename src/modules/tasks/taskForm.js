@@ -1,103 +1,235 @@
-export default function generateTaskForm() {
-    /* This could be done easier by saving HTML form to a variable,
+import Task from "../taskClass";
+
+function addTaskForm(handleTask) {
+  /* This could be done easier by saving HTML form to a variable,
     and then just adding that as innerHTML of a container div,
     but I am not doing it since it is a security risk*/
 
-    // Create necessary elements:
-    const taskForm = document.createElement('form');
+  // Create necessary elements:
+  const taskForm = document.createElement("form");
 
-    const title = document.createElement('input');
-    const description = document.createElement('textarea');
-    const priority = document.createElement('input');
-    const dueDate = document.createElement('input');
-    const complete = document.createElement('select');
-    const completeYes = document.createElement('option');
-    const completeNo = document.createElement('option');
+  const title = document.createElement("input");
+  const description = document.createElement("textarea");
+  const priority = document.createElement("input");
+  const dueDate = document.createElement("input");
+  const complete = document.createElement("select");
+  const completeYes = document.createElement("option");
+  const completeNo = document.createElement("option");
 
-    const titleLabel = document.createElement('label');
-    const descriptionLabel = document.createElement('label');
-    const priorityLabel = document.createElement('label');
-    const dueDateLabel = document.createElement('label');
-    const completeLabel = document.createElement('label');
+  const titleLabel = document.createElement("label");
+  const descriptionLabel = document.createElement("label");
+  const priorityLabel = document.createElement("label");
+  const dueDateLabel = document.createElement("label");
+  const completeLabel = document.createElement("label");
 
-    const taskName = document.createElement('h1');
-    
-    const submitButton = document.createElement('button');
+  const taskName = document.createElement("h1");
 
-    // Add attributes to elements:
+  const submitButton = document.createElement("button");
 
-    taskForm.id = 'task-form';
+  // Add attributes to elements:
+  taskForm.id = "task-form";
 
-    taskName.innerText = 'New Task'
-    title.id = 'task-form-title';
-    title.setAttribute('type', 'text');
-    title.setAttribute('name', 'task-form-title');
-    title.setAttribute('required', '');
-    
-    titleLabel.setAttribute('for', 'task-form-title');
-    titleLabel.innerText = 'Title';
+  taskName.innerText = "New Task";
+  title.id = "task-form-title";
+  title.setAttribute("type", "text");
+  title.setAttribute("name", "task-form-title");
+  title.setAttribute("required", "");
 
-    description.id = 'task-form-description';
-    description.setAttribute('name', 'task-form-description');
-    description.setAttribute('rows', '5');
-    description.setAttribute('cols', '30');
+  titleLabel.setAttribute("for", "task-form-title");
+  titleLabel.innerText = "Title";
 
-    descriptionLabel.setAttribute('for', 'task-form-title');
-    descriptionLabel.innerText = 'Description';
+  description.id = "task-form-description";
+  description.setAttribute("name", "task-form-description");
+  description.setAttribute("rows", "5");
+  description.setAttribute("cols", "30");
 
-    priority.id = 'task-form-priority';
-    priority.setAttribute('type', 'number');
-    priority.setAttribute('name', 'task-form-priority');
-    priority.setAttribute('required', '');
-    priority.setAttribute('min', '1');
-    priority.setAttribute('max', '5');
-    priority.setAttribute('value', '3');
+  descriptionLabel.setAttribute("for", "task-form-title");
+  descriptionLabel.innerText = "Description";
 
-    priorityLabel.setAttribute('for', 'task-form-priority');
-    priorityLabel.innerText = 'Priority';
+  priority.id = "task-form-priority";
+  priority.setAttribute("type", "number");
+  priority.setAttribute("name", "task-form-priority");
+  priority.setAttribute("required", "");
+  priority.setAttribute("min", "1");
+  priority.setAttribute("max", "5");
+  priority.setAttribute("value", "3");
 
-    dueDate.id = 'task-form-date';
-    dueDate.setAttribute('type', 'date');
-    dueDate.setAttribute('name', 'task-form-date');
-    dueDate.setAttribute('required', '');
+  priorityLabel.setAttribute("for", "task-form-priority");
+  priorityLabel.innerText = "Priority";
 
-    dueDateLabel.setAttribute('for', 'task-form-date');
-    dueDateLabel.innerText = 'Due Date';
+  dueDate.id = "task-form-date";
+  dueDate.setAttribute("type", "datetime-local");
+  dueDate.setAttribute("name", "task-form-date");
+  dueDate.setAttribute("required", "");
 
-    complete.id = 'task-form-complete';
-    complete.setAttribute('name', 'task-form-complete');
+  dueDateLabel.setAttribute("for", "task-form-date");
+  dueDateLabel.innerText = "Due Date";
 
-    completeLabel.setAttribute('for', 'task-form-complete');
-    completeLabel.innerText = 'Have you already completed this task?';
+  complete.id = "task-form-complete";
+  complete.setAttribute("name", "task-form-complete");
 
-    completeNo.innerText = 'No';
-    completeNo.setAttribute('selected', '');
-    completeNo.setAttribute('value', 'false');
+  completeLabel.setAttribute("for", "task-form-complete");
+  completeLabel.innerText = "Have you already completed this task?";
 
-    completeYes.innerText = 'Yes'
-    completeYes.setAttribute('value', 'true');
+  completeNo.innerText = "No";
+  completeNo.setAttribute("selected", "");
+  completeNo.setAttribute("value", "no");
 
-    submitButton.setAttribute('type', 'submit');
-    submitButton.innerText = 'Submit';
+  completeYes.innerText = "Yes";
+  completeYes.setAttribute("value", "yes");
 
-    // Append elements to form:
+  submitButton.setAttribute("type", "submit");
+  submitButton.innerText = "Submit";
 
-    taskForm.appendChild(taskName);
-    taskForm.appendChild(titleLabel);
-    taskForm.appendChild(title);
-    taskForm.appendChild(descriptionLabel);
-    taskForm.appendChild(description);
-    taskForm.appendChild(priorityLabel);
-    taskForm.appendChild(priority);
-    taskForm.appendChild(dueDateLabel);
-    taskForm.appendChild(dueDate);
-    complete.appendChild(completeNo);
-    complete.appendChild(completeYes);
-    taskForm.appendChild(completeLabel);
-    taskForm.appendChild(complete);
-    taskForm.appendChild(submitButton);
+  // Append elements to form:
+  taskForm.appendChild(taskName);
+  taskForm.appendChild(titleLabel);
+  taskForm.appendChild(title);
+  taskForm.appendChild(descriptionLabel);
+  taskForm.appendChild(description);
+  taskForm.appendChild(priorityLabel);
+  taskForm.appendChild(priority);
+  taskForm.appendChild(dueDateLabel);
+  taskForm.appendChild(dueDate);
+  complete.appendChild(completeNo);
+  complete.appendChild(completeYes);
+  taskForm.appendChild(completeLabel);
+  taskForm.appendChild(complete);
+  taskForm.appendChild(submitButton);
 
-    document.body.appendChild(taskForm);
+  // Handle submit:
+  taskForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let completeValue;
+    if (complete.value === "yes") {
+      completeValue = true;
+    } else if(complete.value === "no"){
+      completeValue = false;
+    }
 
-    // CHAPTER input to be added once data structure is completely defined
+    const newTask = new Task(
+      title.value,
+      description.value,
+      completeValue,
+      dueDate.value,
+      priority.value
+    );
+    await handleTask(newTask);
+    document.body.removeChild(taskForm);
+  });
+
+  document.body.appendChild(taskForm);
+
+  // CHAPTER input to be added once data structure is completely defined
 }
+
+function editTaskForm(task) {
+  // Create necessary elements:
+  const taskForm = document.createElement("form");
+
+  const title = document.createElement("input");
+  const description = document.createElement("textarea");
+  const priority = document.createElement("input");
+  const dueDate = document.createElement("input");
+  const complete = document.createElement("select");
+  const completeYes = document.createElement("option");
+  const completeNo = document.createElement("option");
+
+  const titleLabel = document.createElement("label");
+  const descriptionLabel = document.createElement("label");
+  const priorityLabel = document.createElement("label");
+  const dueDateLabel = document.createElement("label");
+  const completeLabel = document.createElement("label");
+
+  const taskName = document.createElement("h1");
+
+  const submitButton = document.createElement("button");
+
+  // Add attributes to elements:
+
+  taskForm.id = "task-form";
+
+  taskName.innerText = "Edit Task";
+  title.id = "task-form-title";
+  title.setAttribute("type", "text");
+  title.setAttribute("name", "task-form-title");
+  title.setAttribute("required", "");
+
+  titleLabel.setAttribute("for", "task-form-title");
+  titleLabel.innerText = "Title";
+
+  description.id = "task-form-description";
+  description.setAttribute("name", "task-form-description");
+  description.setAttribute("rows", "5");
+  description.setAttribute("cols", "30");
+
+  descriptionLabel.setAttribute("for", "task-form-title");
+  descriptionLabel.innerText = "Description";
+
+  priority.id = "task-form-priority";
+  priority.setAttribute("type", "number");
+  priority.setAttribute("name", "task-form-priority");
+  priority.setAttribute("required", "");
+  priority.setAttribute("min", "1");
+  priority.setAttribute("max", "5");
+
+  priorityLabel.setAttribute("for", "task-form-priority");
+  priorityLabel.innerText = "Priority";
+
+  dueDate.id = "task-form-date";
+  dueDate.setAttribute("type", "date");
+  dueDate.setAttribute("name", "task-form-date");
+  dueDate.setAttribute("required", "");
+
+  dueDateLabel.setAttribute("for", "task-form-date");
+  dueDateLabel.innerText = "Due Date";
+
+  complete.id = "task-form-complete";
+  complete.setAttribute("name", "task-form-complete");
+
+  completeLabel.setAttribute("for", "task-form-complete");
+  completeLabel.innerText = "Have you already completed this task?";
+
+  completeNo.innerText = "No";
+  completeNo.setAttribute("selected", "");
+  completeNo.setAttribute("value", "false");
+
+  completeYes.innerText = "Yes";
+  completeYes.setAttribute("value", "true");
+
+  submitButton.setAttribute("type", "submit");
+  submitButton.innerText = "Submit";
+
+  // Show task values:
+
+  title.value = task.title;
+  description.value = task.description;
+  priority.value = task.priority;
+  dueDate.value = task.dueDate;
+  complete.value = task.complete;
+
+  // Append elements to form:
+
+  taskForm.appendChild(taskName);
+  taskForm.appendChild(titleLabel);
+  taskForm.appendChild(title);
+  taskForm.appendChild(descriptionLabel);
+  taskForm.appendChild(description);
+  taskForm.appendChild(priorityLabel);
+  taskForm.appendChild(priority);
+  taskForm.appendChild(dueDateLabel);
+  taskForm.appendChild(dueDate);
+  complete.appendChild(completeNo);
+  complete.appendChild(completeYes);
+  taskForm.appendChild(completeLabel);
+  taskForm.appendChild(complete);
+  taskForm.appendChild(submitButton);
+
+  taskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
+
+  document.body.appendChild(taskForm);
+}
+
+export { addTaskForm, editTaskForm };
