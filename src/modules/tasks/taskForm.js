@@ -2,6 +2,7 @@ import Task from "../taskClass";
 import { handleTaskForm } from "../..";
 
 function addTaskForm() {
+  console.log('Task form initated');
   // Create necessary elements:
   const taskForm = document.createElement("form");
 
@@ -136,6 +137,7 @@ function addTaskForm() {
 }
 
 function editTaskForm(task) {
+  console.log('Edit task form initated');
   // Create necessary elements:
   const taskForm = document.createElement("form");
 
