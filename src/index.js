@@ -5,7 +5,7 @@ import loadUserInfo from "./modules/userpage/userinfo";
 import loadUserMenu from "./modules/userpage/usermenu";
 import {loadAllTasks, loadTodaysTasks} from "./modules/tasks/loadAllTasks";
 import generateTaskElement from "./modules/tasks/generateTaskElement";
-import {addTaskForm} from "./modules/tasks/taskForm";
+import {addTaskForm, editTaskForm} from "./modules/tasks/taskForm";
 
 // Font awesome:
 import "@fortawesome/fontawesome-free/js/fontawesome";
@@ -76,7 +76,6 @@ function initFirebaseAuth() {
         getTodaysTasksForCurrentUser,
         getThisWeeksTasksForCurrentUser
       );
-        // addTaskForm(handleTask);
     } else {
       loadHome(signIn);
     }
@@ -174,7 +173,7 @@ async function getThisWeeksTasksForCurrentUser() {
 it will be overwritten, which means that this function can work for both
 add and edit task functionalities */
 
-async function handleTask(task) {
+async function handleTaskForm(task) {
   const timestamp = Timestamp.fromDate(new Date(task.dueDate));
 
   await setDoc(doc(db, 'Tasks', task.title), {
@@ -186,3 +185,5 @@ async function handleTask(task) {
     complete: task.complete
   });
 }
+
+export {handleTaskForm}

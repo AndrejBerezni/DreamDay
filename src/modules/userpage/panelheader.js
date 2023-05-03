@@ -1,3 +1,5 @@
+import { addTaskForm } from "../tasks/taskForm";
+
 function addTitleToSection(title, container) {
     const titleContainer = document.createElement('div');
     const buttonsContainer = document.createElement('div');
@@ -16,6 +18,7 @@ function addTitleToSection(title, container) {
     addChapter.innerText = '+ Add Chapter';
     addNote.innerText = '+ Add Note';
 
+    addTask.addEventListener('click', addTaskForm)
     buttonsContainer.appendChild(addTask);
     buttonsContainer.appendChild(addChapter);
     buttonsContainer.appendChild(addNote);

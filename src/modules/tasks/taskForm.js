@@ -1,10 +1,7 @@
 import Task from "../taskClass";
+import { handleTaskForm } from "../..";
 
-function addTaskForm(handleTask) {
-  /* This could be done easier by saving HTML form to a variable,
-    and then just adding that as innerHTML of a container div,
-    but I am not doing it since it is a security risk*/
-
+function addTaskForm() {
   // Create necessary elements:
   const taskForm = document.createElement("form");
 
@@ -25,8 +22,12 @@ function addTaskForm(handleTask) {
   const taskName = document.createElement("h1");
 
   const submitButton = document.createElement("button");
+  const cancelButton = document.createElement("button");
+
+  const buttonsDiv = document.createElement("div");
 
   // Add attributes to elements:
+
   taskForm.id = "task-form";
 
   taskName.innerText = "New Task";
@@ -52,7 +53,6 @@ function addTaskForm(handleTask) {
   priority.setAttribute("required", "");
   priority.setAttribute("min", "1");
   priority.setAttribute("max", "5");
-  priority.setAttribute("value", "3");
 
   priorityLabel.setAttribute("for", "task-form-priority");
   priorityLabel.innerText = "Priority";
@@ -78,10 +78,18 @@ function addTaskForm(handleTask) {
   completeYes.innerText = "Yes";
   completeYes.setAttribute("value", "yes");
 
+  buttonsDiv.id = 'form-buttons-div';
+
   submitButton.setAttribute("type", "submit");
   submitButton.innerText = "Submit";
 
+  cancelButton.setAttribute("type", "button");
+  cancelButton.innerText = "Cancel";
+
   // Append elements to form:
+  buttonsDiv.appendChild(cancelButton);
+  buttonsDiv.appendChild(submitButton);
+
   taskForm.appendChild(taskName);
   taskForm.appendChild(titleLabel);
   taskForm.appendChild(title);
@@ -95,7 +103,7 @@ function addTaskForm(handleTask) {
   complete.appendChild(completeYes);
   taskForm.appendChild(completeLabel);
   taskForm.appendChild(complete);
-  taskForm.appendChild(submitButton);
+  taskForm.appendChild(buttonsDiv);
 
   // Handle submit:
   taskForm.addEventListener("submit", async (e) => {
@@ -103,7 +111,7 @@ function addTaskForm(handleTask) {
     let completeValue;
     if (complete.value === "yes") {
       completeValue = true;
-    } else if(complete.value === "no"){
+    } else if (complete.value === "no") {
       completeValue = false;
     }
 
@@ -114,7 +122,11 @@ function addTaskForm(handleTask) {
       dueDate.value,
       priority.value
     );
-    await handleTask(newTask);
+    await handleTaskForm(newTask);
+    document.body.removeChild(taskForm);
+  });
+
+  cancelButton.addEventListener("click", () => {
     document.body.removeChild(taskForm);
   });
 
@@ -144,6 +156,9 @@ function editTaskForm(task) {
   const taskName = document.createElement("h1");
 
   const submitButton = document.createElement("button");
+  const cancelButton = document.createElement("button");
+
+  const buttonsDiv = document.createElement("div");
 
   // Add attributes to elements:
 
@@ -177,7 +192,7 @@ function editTaskForm(task) {
   priorityLabel.innerText = "Priority";
 
   dueDate.id = "task-form-date";
-  dueDate.setAttribute("type", "date");
+  dueDate.setAttribute("type", "datetime-local");
   dueDate.setAttribute("name", "task-form-date");
   dueDate.setAttribute("required", "");
 
@@ -192,13 +207,18 @@ function editTaskForm(task) {
 
   completeNo.innerText = "No";
   completeNo.setAttribute("selected", "");
-  completeNo.setAttribute("value", "false");
+  completeNo.setAttribute("value", "no");
 
   completeYes.innerText = "Yes";
-  completeYes.setAttribute("value", "true");
+  completeYes.setAttribute("value", "yes");
 
   submitButton.setAttribute("type", "submit");
   submitButton.innerText = "Submit";
+
+  cancelButton.setAttribute("type", "button");
+  cancelButton.innerText = "Cancel";
+
+  buttonsDiv.id = 'form-buttons-div';
 
   // Show task values:
 
@@ -209,6 +229,8 @@ function editTaskForm(task) {
   complete.value = task.complete;
 
   // Append elements to form:
+  buttonsDiv.appendChild(cancelButton);
+  buttonsDiv.appendChild(submitButton);
 
   taskForm.appendChild(taskName);
   taskForm.appendChild(titleLabel);
@@ -223,11 +245,34 @@ function editTaskForm(task) {
   complete.appendChild(completeYes);
   taskForm.appendChild(completeLabel);
   taskForm.appendChild(complete);
-  taskForm.appendChild(submitButton);
+  taskForm.appendChild(buttonsDiv);
 
-  taskForm.addEventListener("submit", (e) => {
+  // Handle submit:
+  taskForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    let completeValue;
+    if (complete.value === "yes") {
+      completeValue = true;
+    } else if (complete.value === "no") {
+      completeValue = false;
+    }
+
+    const newTask = new Task(
+      title.value,
+      description.value,
+      completeValue,
+      dueDate.value,
+      priority.value
+    );
+    await handleTaskForm(newTask);
+    document.body.removeChild(taskForm);
   });
+
+  cancelButton.addEventListener("click", () => {
+    document.body.removeChild(taskForm);
+  });
+
+  document.body.appendChild(taskForm);
 
   document.body.appendChild(taskForm);
 }

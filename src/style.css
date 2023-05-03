@@ -546,19 +546,34 @@ body {
   font-size: 1.1rem;
 }
 
-#task-form > button {
+#form-buttons-div {
+  display: flex;
+  justify-content: space-around;
+}
+#form-buttons-div > button {
   font-family: var(--titleFont);
   font-size: 1.3rem;
-  border: none;
-  background-color: transparent;
   transition: .3s;
   font-weight: bold;
   margin-top: 3vh;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 1px 2px black;;
 }
 
-#task-form > button:hover {
-  transform: translateY(-2px) scale(1.05);
-  color: var(--sectionBg);
+#form-buttons-div > button:nth-of-type(1) {
+  background-color: var(--sectionBg);
+  color: var(--sectionTextColor);
+  text-shadow: var(--textShadow);
+}
+
+#form-buttons-div > button:nth-of-type(2) {
+  background-color: var(--sectionTextAccent);
+  color: black;
+}
+
+#form-buttons-div > button:hover {
+  transform: translateY(-2px);
   cursor: pointer;
-  text-decoration: underline;
 }

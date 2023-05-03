@@ -1,3 +1,5 @@
+import { editTaskForm } from "./taskForm";
+
 export default function generateTaskElement(task, container) {
     const taskDiv = document.createElement('div');
     const taskDivLeft = document.createElement('div');
@@ -22,6 +24,14 @@ export default function generateTaskElement(task, container) {
     const taskComplete = document.createElement('icon');
     const taskEdit = document.createElement('icon');
     const taskDelete = document.createElement('icon');
+    
+    /* Creating containers to place icons inside them because
+    event listeners did not work on icons them selves - no error was thrown,
+    but my assumption is that it has to do with how Font Awesome icons are
+    being handled by Webpack - they are converted to SVG */
+    const taskCompleteContainer = document.createElement('icon');
+    const taskEditContainer = document.createElement('icon');
+    const taskDeleteContainer = document.createElement('icon');
 
     if (task.complete) {
         taskComplete.classList.add('far', 'fa-check-square');
@@ -32,15 +42,23 @@ export default function generateTaskElement(task, container) {
     taskEdit.classList.add('far', 'fa-edit');
     taskDelete.classList.add('fas', 'fa-trash');
 
+    taskEditContainer.addEventListener('click', ()=> {
+        editTaskForm(task)
+    });
+
     titleDateDiv.appendChild(taskTitle);
     titleDateDiv.appendChild(taskDate);
 
     taskDivLeft.appendChild(titleDateDiv);
     taskDivLeft.appendChild(taskDescription);
 
-    taskDivRight.appendChild(taskComplete);
-    taskDivRight.appendChild(taskEdit);
-    taskDivRight.appendChild(taskDelete);
+    taskCompleteContainer.appendChild(taskComplete);
+    taskEditContainer.appendChild(taskEdit);
+    taskDeleteContainer.appendChild(taskDelete);
+
+    taskDivRight.appendChild(taskCompleteContainer);
+    taskDivRight.appendChild(taskEditContainer);
+    taskDivRight.appendChild(taskDeleteContainer);
 
     taskDiv.appendChild(taskDivLeft);
     taskDiv.appendChild(taskDivRight);
