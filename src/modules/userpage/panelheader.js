@@ -11,7 +11,9 @@ function addTitleToSection(title, container) {
   const addTask = document.createElement("button");
   const addChapter = document.createElement("button");
   const addNote = document.createElement("button");
-
+  
+  titleElement.id = 'section-title';
+  
   titleElement.innerText = title;
   addTask.innerText = "+ Add Task";
   addChapter.innerText = "+ Add Chapter";

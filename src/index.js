@@ -191,4 +191,4 @@ async function deleteTask(taskTitle) {
   await deleteDoc(doc(db, "Tasks", taskTitle));
 };
 
-export {handleTaskForm, deleteTask}
+export {handleTaskForm, deleteTask, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser}

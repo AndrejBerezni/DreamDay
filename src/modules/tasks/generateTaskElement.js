@@ -1,8 +1,21 @@
-import { doc } from "firebase/firestore";
 import { editTaskForm } from "./taskForm";
-import { deleteTask } from "../..";
+import {
+    deleteTask,
+    getTasksForCurrentUser,
+    getTodaysTasksForCurrentUser,
+    getThisWeeksTasksForCurrentUser,
+  } from "../..";
+  import {
+    loadAllTasks,
+    loadThisWeeksTasks,
+    loadTodaysTasks,
+  } from "./loadAllTasks";
+  import { addTitleToSection } from "../userpage/panelheader";
 
 export default function generateTaskElement(task, container) {
+    const panel = document.getElementById('panel');
+    const sectionTitle = document.getElementById('section-title');
+
     const taskDiv = document.createElement('div');
     const taskDivLeft = document.createElement('div');
     const taskDivRight = document.createElement('div');
@@ -68,6 +81,27 @@ export default function generateTaskElement(task, container) {
         confirmDeletionButton.addEventListener('click', async () => {
             await deleteTask(task.title);
             document.body.removeChild(confirmDeletionBox);
+            if (sectionTitle.innerText === "All Tasks") {
+                panel.innerHTML = "";
+                addTitleToSection("All Tasks", panel);
+                await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement);
+              } else if (sectionTitle.innerText === "Today's Tasks") {
+                panel.innerHTML = "";
+                addTitleToSection("Today's Tasks", panel);
+                await loadTodaysTasks(
+                  panel,
+                  getTodaysTasksForCurrentUser,
+                  generateTaskElement
+                );
+              } else if (sectionTitle.innerText === "This Week") {
+                panel.innerHTML = "";
+                addTitleToSection("This Week", panel);
+                await loadThisWeeksTasks(
+                  panel,
+                  getThisWeeksTasksForCurrentUser,
+                  generateTaskElement
+                );
+              }
 
         });
 

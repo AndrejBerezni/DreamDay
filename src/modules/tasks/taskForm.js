@@ -1,8 +1,23 @@
 import Task from "../taskClass";
-import { handleTaskForm, deleteTask } from "../..";
+import {
+  handleTaskForm,
+  deleteTask,
+  getTasksForCurrentUser,
+  getTodaysTasksForCurrentUser,
+  getThisWeeksTasksForCurrentUser,
+} from "../..";
+import {
+  loadAllTasks,
+  loadThisWeeksTasks,
+  loadTodaysTasks,
+} from "./loadAllTasks";
+import { addTitleToSection } from "../userpage/panelheader";
+import generateTaskElement from "./generateTaskElement";
 
 function addTaskForm() {
-  console.log('Task form initated');
+  console.log("Task form initated");
+  const panel = document.getElementById("panel");
+  const sectionTitle = document.getElementById("section-title");
   // Create necessary elements:
   const taskForm = document.createElement("form");
 
@@ -79,7 +94,7 @@ function addTaskForm() {
   completeYes.innerText = "Yes";
   completeYes.setAttribute("value", "yes");
 
-  buttonsDiv.id = 'form-buttons-div';
+  buttonsDiv.id = "form-buttons-div";
 
   submitButton.setAttribute("type", "submit");
   submitButton.innerText = "Submit";
@@ -125,6 +140,28 @@ function addTaskForm() {
     );
     await handleTaskForm(newTask);
     document.body.removeChild(taskForm);
+    // Reload section with changes:
+    if (sectionTitle.innerText === "All Tasks") {
+      panel.innerHTML = "";
+      addTitleToSection("All Tasks", panel);
+      await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement);
+    } else if (sectionTitle.innerText === "Today's Tasks") {
+      panel.innerHTML = "";
+      addTitleToSection("Today's Tasks", panel);
+      await loadTodaysTasks(
+        panel,
+        getTodaysTasksForCurrentUser,
+        generateTaskElement
+      );
+    } else if (sectionTitle.innerText === "This Week") {
+      panel.innerHTML = "";
+      addTitleToSection("This Week", panel);
+      await loadThisWeeksTasks(
+        panel,
+        getThisWeeksTasksForCurrentUser,
+        generateTaskElement
+      );
+    }
   });
 
   cancelButton.addEventListener("click", () => {
@@ -137,7 +174,9 @@ function addTaskForm() {
 }
 
 function editTaskForm(task) {
-  console.log('Edit task form initated');
+  console.log("Edit task form initated");
+  const panel = document.getElementById("panel");
+  const sectionTitle = document.getElementById("section-title");
   // Create necessary elements:
   const taskForm = document.createElement("form");
 
@@ -220,7 +259,7 @@ function editTaskForm(task) {
   cancelButton.setAttribute("type", "button");
   cancelButton.innerText = "Cancel";
 
-  buttonsDiv.id = 'form-buttons-div';
+  buttonsDiv.id = "form-buttons-div";
 
   // Show task values:
 
@@ -270,11 +309,34 @@ function editTaskForm(task) {
     );
     /* If titles do not match, new document will be created and we will have duplicates.
     This way we prevent that: */
-    if(task.title !== newTask) {
-      await deleteTask(task.title)
+    if (task.title !== newTask) {
+      await deleteTask(task.title);
     }
     await handleTaskForm(newTask);
     document.body.removeChild(taskForm);
+
+    // Reload section with changes:
+    if (sectionTitle.innerText === "All Tasks") {
+      panel.innerHTML = "";
+      addTitleToSection("All Tasks", panel);
+      await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement);
+    } else if (sectionTitle.innerText === "Today's Tasks") {
+      panel.innerHTML = "";
+      addTitleToSection("Today's Tasks", panel);
+      await loadTodaysTasks(
+        panel,
+        getTodaysTasksForCurrentUser,
+        generateTaskElement
+      );
+    } else if (sectionTitle.innerText === "This Week") {
+      panel.innerHTML = "";
+      addTitleToSection("This Week", panel);
+      await loadThisWeeksTasks(
+        panel,
+        getThisWeeksTasksForCurrentUser,
+        generateTaskElement
+      );
+    }
   });
 
   cancelButton.addEventListener("click", () => {
