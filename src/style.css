@@ -559,7 +559,7 @@ body {
   border: none;
   border-radius: 5px;
   padding: 10px;
-  box-shadow: 0px 1px 2px black;;
+  box-shadow: 0px 1px 2px black;
 }
 
 #form-buttons-div > button:nth-of-type(1) {
@@ -576,4 +576,55 @@ body {
 #form-buttons-div > button:hover {
   transform: translateY(-2px);
   cursor: pointer;
+}
+
+/* Task Deletion Box */
+
+#confirm-task-deletion-box {
+  position: fixed;
+  top: 40%;
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sectionTextColor);
+  padding: 2vh 3vw;
+  gap: 2vh;
+  border: 1px solid var(--sectionBg);
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px black;
+}
+
+#confirm-task-deletion-box > p {
+  font-family: var(--textFont);
+}
+
+#confirm-task-deletion-box > div {
+  display: flex;
+  justify-content: space-around;
+}
+
+#confirm-task-deletion-box > div > button {
+  width: 30%;
+  min-height: 3vh;
+  border-radius: 5px;
+  box-shadow: 0px 1px 1px black;
+  font-family: var(--titleFont);
+  font-weight: bold;
+  transition: .3s;
+}
+
+#confirm-task-deletion-box > div > button:hover {
+  cursor: pointer;
+  transform: translatey(-2px);
+}
+
+#confirm-task-deletion-box > div > button:nth-of-type(1) {
+  background-color: var(--sectionTextAccent);
+
+}
+
+#confirm-task-deletion-box > div > button:nth-of-type(2) {
+  background-color: var(--sectionBg);
+  color: var(--sectionTextColor);
+  text-shadow: var(--textShadow);
 }

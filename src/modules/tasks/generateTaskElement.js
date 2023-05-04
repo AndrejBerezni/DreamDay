@@ -1,4 +1,6 @@
+import { doc } from "firebase/firestore";
 import { editTaskForm } from "./taskForm";
+import { deleteTask } from "../..";
 
 export default function generateTaskElement(task, container) {
     const taskDiv = document.createElement('div');
@@ -45,6 +47,38 @@ export default function generateTaskElement(task, container) {
     taskEditContainer.addEventListener('click', ()=> {
         editTaskForm(task)
     });
+
+    taskDeleteContainer.addEventListener('click', () => {
+        const confirmDeletionBox = document.createElement('div');
+        const deletionBoxText = document.createElement('p');
+        const deletionButtonsDiv = document.createElement('div');
+        const confirmDeletionButton = document.createElement('button');
+        const cancelDeletionButton = document.createElement('button');
+
+        confirmDeletionBox.id = 'confirm-task-deletion-box';
+
+        deletionBoxText.innerText = 'Are you sure that you want to delete this task?';
+        confirmDeletionButton.innerText = 'Yes';
+        cancelDeletionButton.innerText = 'No';
+
+        cancelDeletionButton.addEventListener('click', () => {
+            document.body.removeChild(confirmDeletionBox);
+        });
+
+        confirmDeletionButton.addEventListener('click', async () => {
+            await deleteTask(task.title);
+            document.body.removeChild(confirmDeletionBox);
+
+        });
+
+        deletionButtonsDiv.appendChild(cancelDeletionButton);
+        deletionButtonsDiv.appendChild(confirmDeletionButton);
+
+        confirmDeletionBox.appendChild(deletionBoxText);
+        confirmDeletionBox.appendChild(deletionButtonsDiv);
+
+        document.body.appendChild(confirmDeletionBox);
+    })
 
     titleDateDiv.appendChild(taskTitle);
     titleDateDiv.appendChild(taskDate);

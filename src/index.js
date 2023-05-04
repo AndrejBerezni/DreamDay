@@ -35,6 +35,7 @@ import {
   onSnapshot,
   setDoc,
   updateDoc,
+  deleteDoc,
   doc,
   getDocs,
   getDoc,
@@ -186,4 +187,8 @@ async function handleTaskForm(task) {
   });
 }
 
-export {handleTaskForm}
+async function deleteTask(taskTitle) {
+  await deleteDoc(doc(db, "Tasks", taskTitle));
+};
+
+export {handleTaskForm, deleteTask}

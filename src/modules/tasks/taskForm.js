@@ -1,5 +1,5 @@
 import Task from "../taskClass";
-import { handleTaskForm } from "../..";
+import { handleTaskForm, deleteTask } from "../..";
 
 function addTaskForm() {
   console.log('Task form initated');
@@ -230,6 +230,8 @@ function editTaskForm(task) {
   dueDate.value = task.dueDate;
   complete.value = task.complete;
 
+  // let valueForCheck = title.value;
+
   // Append elements to form:
   buttonsDiv.appendChild(cancelButton);
   buttonsDiv.appendChild(submitButton);
@@ -266,6 +268,11 @@ function editTaskForm(task) {
       dueDate.value,
       priority.value
     );
+    /* If titles do not match, new document will be created and we will have duplicates.
+    This way we prevent that: */
+    if(task.title !== newTask) {
+      await deleteTask(task.title)
+    }
     await handleTaskForm(newTask);
     document.body.removeChild(taskForm);
   });
