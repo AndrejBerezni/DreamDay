@@ -4,6 +4,7 @@ import {
     getTasksForCurrentUser,
     getTodaysTasksForCurrentUser,
     getThisWeeksTasksForCurrentUser,
+    updateTaskCompleted
   } from "../..";
   import {
     loadAllTasks,
@@ -63,13 +64,49 @@ export default function generateTaskElement(task, container) {
 
     if (task.complete) {
         taskComplete.classList.add('far', 'fa-check-square');
+        taskComplete.style.color = 'green';
+        taskTitle.style.textDecoration = 'line-through'
     } else {
         taskComplete.classList.add('far', 'fa-square');
     }
 
     taskEdit.classList.add('far', 'fa-edit');
     taskDelete.classList.add('fas', 'fa-trash');
-
+    // Function to reload tasks when task is updated or deleted:
+    async function reloadTasks() {
+      if (sectionTitle.innerText === "All Tasks") {
+        panel.innerHTML = "";
+        addTitleToSection("All Tasks", panel);
+        await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement);
+      } else if (sectionTitle.innerText === "Today's Tasks") {
+        panel.innerHTML = "";
+        addTitleToSection("Today's Tasks", panel);
+        await loadTodaysTasks(
+          panel,
+          getTodaysTasksForCurrentUser,
+          generateTaskElement
+        );
+      } else if (sectionTitle.innerText === "This Week") {
+        panel.innerHTML = "";
+        addTitleToSection("This Week", panel);
+        await loadThisWeeksTasks(
+          panel,
+          getThisWeeksTasksForCurrentUser,
+          generateTaskElement
+        );
+      }
+    }
+    taskCompleteContainer.addEventListener('click', async () => {
+      if (task.complete) {
+        taskComplete.classList.remove('fa-check-square');
+        taskComplete.classList.add('fa-square');
+    } else {
+        taskComplete.classList.remove('fa-square');
+        taskComplete.classList.remove('fa-check-square');
+    }
+        await updateTaskCompleted(task);
+        await reloadTasks();
+    })
     taskEditContainer.addEventListener('click', ()=> {
         editTaskForm(task)
     });
@@ -94,28 +131,7 @@ export default function generateTaskElement(task, container) {
         confirmDeletionButton.addEventListener('click', async () => {
             await deleteTask(task.title);
             document.body.removeChild(confirmDeletionBox);
-            if (sectionTitle.innerText === "All Tasks") {
-                panel.innerHTML = "";
-                addTitleToSection("All Tasks", panel);
-                await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement);
-              } else if (sectionTitle.innerText === "Today's Tasks") {
-                panel.innerHTML = "";
-                addTitleToSection("Today's Tasks", panel);
-                await loadTodaysTasks(
-                  panel,
-                  getTodaysTasksForCurrentUser,
-                  generateTaskElement
-                );
-              } else if (sectionTitle.innerText === "This Week") {
-                panel.innerHTML = "";
-                addTitleToSection("This Week", panel);
-                await loadThisWeeksTasks(
-                  panel,
-                  getThisWeeksTasksForCurrentUser,
-                  generateTaskElement
-                );
-              }
-
+            await reloadTasks();
         });
 
         deletionButtonsDiv.appendChild(cancelDeletionButton);

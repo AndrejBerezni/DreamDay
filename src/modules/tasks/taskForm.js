@@ -247,12 +247,17 @@ function editTaskForm(task) {
   completeLabel.innerText = "Have you already completed this task?";
 
   completeNo.innerText = "No";
-  completeNo.setAttribute("selected", "");
   completeNo.setAttribute("value", "no");
 
   completeYes.innerText = "Yes";
   completeYes.setAttribute("value", "yes");
-
+  
+  if (task.complete === true) {
+    completeYes.setAttribute("selected", "");
+  } else {
+    completeNo.setAttribute("selected", "");
+  }
+  
   submitButton.setAttribute("type", "submit");
   submitButton.innerText = "Submit";
 

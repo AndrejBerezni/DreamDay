@@ -191,4 +191,11 @@ async function deleteTask(taskTitle) {
   await deleteDoc(doc(db, "Tasks", taskTitle));
 };
 
-export {handleTaskForm, deleteTask, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser}
+async function updateTaskCompleted(task) {
+  const taskDoc = doc(db, "Tasks", task.title);
+  await updateDoc(taskDoc, {
+    complete: !task.complete
+  })
+}
+
+export {handleTaskForm, deleteTask, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser, updateTaskCompleted}
