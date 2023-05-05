@@ -266,7 +266,7 @@ function editTaskForm(task) {
   title.value = task.title;
   description.value = task.description;
   priority.value = task.priority;
-  dueDate.value = task.dueDate;
+  dueDate.value = task.dueDate.toDate().toISOString().slice(0, 16); //formating it to match datetime-local format and be displayed
   complete.value = task.complete;
 
   // let valueForCheck = title.value;
