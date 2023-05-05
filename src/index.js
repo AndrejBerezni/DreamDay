@@ -1,11 +1,6 @@
 import "./style.css";
 import loadHome from "./modules/homepage/homepage";
 import loadUserPage from "./modules/userpage/userpage";
-import loadUserInfo from "./modules/userpage/userinfo";
-import loadUserMenu from "./modules/userpage/usermenu";
-import {loadAllTasks, loadTodaysTasks} from "./modules/tasks/loadAllTasks";
-import generateTaskElement from "./modules/tasks/generateTaskElement";
-import {addTaskForm, editTaskForm} from "./modules/tasks/taskForm";
 
 // Font awesome:
 import "@fortawesome/fontawesome-free/js/fontawesome";
@@ -40,7 +35,7 @@ import {
   getDocs,
   getDoc,
   serverTimestamp,
-  Timestamp
+  Timestamp,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -126,15 +121,23 @@ async function getTasksForCurrentUser() {
     tasksArray.push(doc.data());
   });
   return tasksArray;
-};
+}
 
 // Variables to use in functions to get tasks for today and current week
 const today = new Date();
 const dayOfWeek = today.getDay();
-const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+const startOfToday = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate()
+);
 const tomorrow = new Date(startOfToday.getTime() + 24 * 60 * 60 * 1000);
-const startOfWeek = new Date(today.getTime() - (dayOfWeek - 1) * 24 * 60 * 60 * 1000);
-const endOfWeek = new Date(today.getTime() + (7 - dayOfWeek) * 24 * 60 * 60 * 1000);
+const startOfWeek = new Date(
+  today.getTime() - (dayOfWeek - 1) * 24 * 60 * 60 * 1000
+);
+const endOfWeek = new Date(
+  today.getTime() + (7 - dayOfWeek) * 24 * 60 * 60 * 1000
+);
 
 async function getTodaysTasksForCurrentUser() {
   let tasksArray = [];
@@ -150,7 +153,7 @@ async function getTodaysTasksForCurrentUser() {
     tasksArray.push(doc.data());
   });
   return tasksArray;
-};
+}
 
 async function getThisWeeksTasksForCurrentUser() {
   let tasksArray = [];
@@ -166,7 +169,22 @@ async function getThisWeeksTasksForCurrentUser() {
     tasksArray.push(doc.data());
   });
   return tasksArray;
-};
+}
+
+async function getTasksFromChapter(chapter) {
+  let tasksArray = [];
+  const currentUserID = await getAuth().currentUser.uid;
+  const q = query(
+    collection(db, "Tasks"),
+    where("userId", "==", currentUserID),
+    where("chapter", "==", chapter)
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    tasksArray.push(doc.data());
+  });
+  return tasksArray;
+}
 
 // Write data
 
@@ -177,33 +195,43 @@ add and edit task functionalities */
 async function handleTaskForm(task) {
   const timestamp = Timestamp.fromDate(new Date(task.dueDate));
 
-  await setDoc(doc(db, 'Tasks', task.title), {
+  await setDoc(doc(db, "Tasks", task.title), {
     userId: await getAuth().currentUser.uid,
     title: task.title,
     description: task.description,
     priority: task.priority,
     dueDate: timestamp,
     complete: task.complete,
-    chapter: task.chapter
+    chapter: task.chapter,
   });
 }
 
 async function deleteTask(taskTitle) {
   await deleteDoc(doc(db, "Tasks", taskTitle));
-};
+}
 
 async function updateTaskCompleted(task) {
   const taskDoc = doc(db, "Tasks", task.title);
   await updateDoc(taskDoc, {
-    complete: !task.complete
-  })
+    complete: !task.complete,
+  });
 }
 
 async function createChapter(chapterTitle) {
-  await setDoc(doc(db, 'Chapters', chapterTitle), {
+  await setDoc(doc(db, "Chapters", chapterTitle), {
     title: chapterTitle,
-    userId: await getAuth().currentUser.uid
-  })
+    userId: await getAuth().currentUser.uid,
+  });
 }
 
-export {handleTaskForm, deleteTask, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser, updateTaskCompleted, createChapter, getChaptersForCurrentUser}
+export {
+  handleTaskForm,
+  deleteTask,
+  getTasksForCurrentUser,
+  getTodaysTasksForCurrentUser,
+  getThisWeeksTasksForCurrentUser,
+  updateTaskCompleted,
+  createChapter,
+  getChaptersForCurrentUser,
+  getTasksFromChapter
+};

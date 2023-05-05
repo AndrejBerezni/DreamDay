@@ -1,7 +1,7 @@
 import { addTitleToSection } from "./panelheader";
 import loadUserInfo from "./userinfo";
 import loadUserMenu from "./usermenu";
-import { loadAllTasks } from "../tasks/loadAllTasks";
+import { loadTasks } from "../tasks/loadTasks";
 import generateTaskElement from "../tasks/generateTaskElement";
 import { createChapter } from "../..";
 
@@ -34,7 +34,7 @@ export default function loadUserPage(
 
   loadUserInfo(userInfo, getProfilePicUrl, getUserName, signOut);
   loadUserMenu(userMenu, getChaptersForCurrentUser, panel, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser);
-  loadAllTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
+  loadTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
 
   panel.appendChild(tasksContainer);
 

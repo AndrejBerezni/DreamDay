@@ -7,11 +7,7 @@ import {
   getThisWeeksTasksForCurrentUser,
   getChaptersForCurrentUser,
 } from "../..";
-import {
-  loadAllTasks,
-  loadThisWeeksTasks,
-  loadTodaysTasks,
-} from "./loadAllTasks";
+import { loadTasks } from "./loadTasks";
 import { addTitleToSection } from "../userpage/panelheader";
 import generateTaskElement from "./generateTaskElement";
 
@@ -162,7 +158,11 @@ async function addTaskForm() {
     if (sectionTitle.innerText === "All Tasks") {
       tasksContainer.innerHTML = "";
       // addTitleToSection("All Tasks", tasksContainer);
-      await loadAllTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
+      await loadTasks(
+        tasksContainer,
+        getTasksForCurrentUser,
+        generateTaskElement
+      );
     } else if (sectionTitle.innerText === "Today's Tasks") {
       tasksContainer.innerHTML = "";
       // addTitleToSection("Today's Tasks", panel);
@@ -175,7 +175,7 @@ async function addTaskForm() {
       tasksContainer.innerHTML = "";
       // addTitleToSection("This Week", panel);
       await loadThisWeeksTasks(
-       tasksContainer,
+        tasksContainer,
         getThisWeeksTasksForCurrentUser,
         generateTaskElement
       );
@@ -357,7 +357,11 @@ async function editTaskForm(task) {
     // Reload section with changes:
     if (sectionTitle.innerText === "All Tasks") {
       tasksContainer.innerHTML = "";
-      await loadAllTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
+      await loadTasks(
+        tasksContainer,
+        getTasksForCurrentUser,
+        generateTaskElement
+      );
     } else if (sectionTitle.innerText === "Today's Tasks") {
       tasksContainer.innerHTML = "";
       await loadTodaysTasks(

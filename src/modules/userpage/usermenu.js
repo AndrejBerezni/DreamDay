@@ -1,6 +1,7 @@
 import generateTaskElement from "../tasks/generateTaskElement";
-import { loadAllTasks, loadTodaysTasks, loadThisWeeksTasks } from "../tasks/loadAllTasks";
+import { loadTasks, loadChapterTasks } from "../tasks/loadTasks";
 import { addTitleToSection } from "./panelheader";
+import { getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser, getTasksFromChapter } from "../..";
 
 export default async function loadUserMenu(
   container,
@@ -50,6 +51,12 @@ export default async function loadUserMenu(
     const chapterElement = document.createElement("button");
     chapterElement.innerText = element;
     chapterElement.classList.add("user-menu-chapter");
+
+    chapterElement.addEventListener('click', async () => {
+      panel.innerHTML = '';
+    addTitleToSection(element, panel);
+    await loadChapterTasks(panel, getTasksFromChapter, element, generateTaskElement)
+    })
     chaptersList.appendChild(chapterElement);
   });
 
@@ -74,19 +81,19 @@ export default async function loadUserMenu(
   homeDiv.addEventListener('click', async () => {
     panel.innerHTML = '';
     addTitleToSection('All Tasks', panel);
-    await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement)
+    await loadTasks(panel, getTasksForCurrentUser, generateTaskElement)
   });
 
   todayDiv.addEventListener('click', async () => {
     panel.innerHTML = '';
     addTitleToSection("Today's Tasks", panel);
-    await loadTodaysTasks(panel, getTodaysTasksForCurrentUser, generateTaskElement)
+    await loadsTasks(panel, getTodaysTasksForCurrentUser, generateTaskElement)
   });
 
   thisWeekDiv.addEventListener('click', async () => {
     panel.innerHTML = '';
     addTitleToSection('This Week', panel);
-    await loadThisWeeksTasks(panel, getThisWeeksTasksForCurrentUser, generateTaskElement)
+    await loadTasks(panel, getThisWeeksTasksForCurrentUser, generateTaskElement)
   });
 
   homeDiv.appendChild(homeIcon);
