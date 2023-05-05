@@ -462,6 +462,12 @@ body {
   align-items: baseline;
 }
 
+.title-date-div > div {
+  aspect-ratio: 1/1;
+  height: 50%;
+  border-radius: 50%;
+}
+
 /* Panel */
 #title-container {
   display: flex;

@@ -31,10 +31,23 @@ export default function generateTaskElement(task, container) {
     const taskTitle = document.createElement('h1');
     const taskDescription = document.createElement('p');
     const taskDate = document.createElement('h2');
+    const taskPriority = document.createElement('div');
 
     taskTitle.innerText = task.title;
     taskDescription.innerText = task.description;
     taskDate.innerText = task.dueDate.toDate().toDateString();
+
+    if (task.priority === '1') {
+      taskPriority.style.backgroundColor = '#FF4136'
+    } else if (task.priority === '2') {
+      taskPriority.style.backgroundColor = '#FF851B'
+    } else if (task.priority === '3') {
+      taskPriority.style.backgroundColor = '#FFDC00'
+    } else if (task.priority === '4') {
+      taskPriority.style.backgroundColor = '#2ECC40'
+    } else if (task.priority === '5') {
+      taskPriority.style.backgroundColor = '#7FDBFF'
+    }
 
     const taskComplete = document.createElement('icon');
     const taskEdit = document.createElement('icon');
@@ -115,6 +128,7 @@ export default function generateTaskElement(task, container) {
     })
 
     titleDateDiv.appendChild(taskTitle);
+    titleDateDiv.appendChild(taskPriority);
     titleDateDiv.appendChild(taskDate);
 
     taskDivLeft.appendChild(titleDateDiv);
