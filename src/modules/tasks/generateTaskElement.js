@@ -15,6 +15,7 @@ import {
 
 export default function generateTaskElement(task, container) {
     const panel = document.getElementById('panel');
+    const tasksContainer = document.getElementById('tasks-container');
     const sectionTitle = document.getElementById('section-title');
 
     const taskDiv = document.createElement('div');
@@ -31,11 +32,13 @@ export default function generateTaskElement(task, container) {
 
     const taskTitle = document.createElement('h1');
     const taskDescription = document.createElement('p');
+    const taskChapter = document.createElement('h3');
     const taskDate = document.createElement('h2');
     const taskPriority = document.createElement('div');
 
     taskTitle.innerText = task.title;
     taskDescription.innerText = task.description;
+    taskChapter.innerText = `Chapter: ${task.chapter}`;
     taskDate.innerText = task.dueDate.toDate().toDateString();
 
     if (task.priority === '1') {
@@ -75,22 +78,19 @@ export default function generateTaskElement(task, container) {
     // Function to reload tasks when task is updated or deleted:
     async function reloadTasks() {
       if (sectionTitle.innerText === "All Tasks") {
-        panel.innerHTML = "";
-        addTitleToSection("All Tasks", panel);
-        await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement);
+        tasksContainer.innerHTML = "";
+        await loadAllTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
       } else if (sectionTitle.innerText === "Today's Tasks") {
-        panel.innerHTML = "";
-        addTitleToSection("Today's Tasks", panel);
+        tasksContainer.innerHTML = "";
         await loadTodaysTasks(
-          panel,
+          tasksContainer,
           getTodaysTasksForCurrentUser,
           generateTaskElement
         );
       } else if (sectionTitle.innerText === "This Week") {
-        panel.innerHTML = "";
-        addTitleToSection("This Week", panel);
+        tasksContainer.innerHTML = "";
         await loadThisWeeksTasks(
-          panel,
+          tasksContainer,
           getThisWeeksTasksForCurrentUser,
           generateTaskElement
         );
@@ -149,6 +149,7 @@ export default function generateTaskElement(task, container) {
 
     taskDivLeft.appendChild(titleDateDiv);
     taskDivLeft.appendChild(taskDescription);
+    taskDivLeft.appendChild(taskChapter);
 
     taskCompleteContainer.appendChild(taskComplete);
     taskEditContainer.appendChild(taskEdit);

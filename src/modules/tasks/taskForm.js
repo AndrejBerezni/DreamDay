@@ -5,6 +5,7 @@ import {
   getTasksForCurrentUser,
   getTodaysTasksForCurrentUser,
   getThisWeeksTasksForCurrentUser,
+  getChaptersForCurrentUser,
 } from "../..";
 import {
   loadAllTasks,
@@ -14,9 +15,10 @@ import {
 import { addTitleToSection } from "../userpage/panelheader";
 import generateTaskElement from "./generateTaskElement";
 
-function addTaskForm() {
+async function addTaskForm() {
   console.log("Task form initated");
   const panel = document.getElementById("panel");
+  const tasksContainer = document.getElementById("tasks-container");
   const sectionTitle = document.getElementById("section-title");
   // Create necessary elements:
   const taskForm = document.createElement("form");
@@ -28,12 +30,23 @@ function addTaskForm() {
   const complete = document.createElement("select");
   const completeYes = document.createElement("option");
   const completeNo = document.createElement("option");
+  const chapter = document.createElement("select");
+  const chapters = await getChaptersForCurrentUser();
 
+  chapters.forEach((chap) => {
+    const chapterElement = document.createElement("option");
+    chapterElement.innerText = chap;
+    chapterElement.setAttribute("value", chap);
+    chapter.appendChild(chapterElement);
+  });
+
+  console.log(`value: ${typeof chapter.value}`);
   const titleLabel = document.createElement("label");
   const descriptionLabel = document.createElement("label");
   const priorityLabel = document.createElement("label");
   const dueDateLabel = document.createElement("label");
   const completeLabel = document.createElement("label");
+  const chapterLabel = document.createElement("label");
 
   const taskName = document.createElement("h1");
 
@@ -94,6 +107,8 @@ function addTaskForm() {
   completeYes.innerText = "Yes";
   completeYes.setAttribute("value", "yes");
 
+  chapterLabel.innerText = "Chapter";
+
   buttonsDiv.id = "form-buttons-div";
 
   submitButton.setAttribute("type", "submit");
@@ -119,6 +134,8 @@ function addTaskForm() {
   complete.appendChild(completeYes);
   taskForm.appendChild(completeLabel);
   taskForm.appendChild(complete);
+  taskForm.appendChild(chapterLabel);
+  taskForm.appendChild(chapter);
   taskForm.appendChild(buttonsDiv);
 
   // Handle submit:
@@ -136,28 +153,29 @@ function addTaskForm() {
       description.value,
       completeValue,
       dueDate.value,
-      priority.value
+      priority.value,
+      chapter.value
     );
     await handleTaskForm(newTask);
     document.body.removeChild(taskForm);
     // Reload section with changes:
     if (sectionTitle.innerText === "All Tasks") {
-      panel.innerHTML = "";
-      addTitleToSection("All Tasks", panel);
-      await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement);
+      tasksContainer.innerHTML = "";
+      // addTitleToSection("All Tasks", tasksContainer);
+      await loadAllTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
     } else if (sectionTitle.innerText === "Today's Tasks") {
-      panel.innerHTML = "";
-      addTitleToSection("Today's Tasks", panel);
+      tasksContainer.innerHTML = "";
+      // addTitleToSection("Today's Tasks", panel);
       await loadTodaysTasks(
-        panel,
+        tasksContainer,
         getTodaysTasksForCurrentUser,
         generateTaskElement
       );
     } else if (sectionTitle.innerText === "This Week") {
-      panel.innerHTML = "";
-      addTitleToSection("This Week", panel);
+      tasksContainer.innerHTML = "";
+      // addTitleToSection("This Week", panel);
       await loadThisWeeksTasks(
-        panel,
+       tasksContainer,
         getThisWeeksTasksForCurrentUser,
         generateTaskElement
       );
@@ -173,9 +191,10 @@ function addTaskForm() {
   // CHAPTER input to be added once data structure is completely defined
 }
 
-function editTaskForm(task) {
+async function editTaskForm(task) {
   console.log("Edit task form initated");
   const panel = document.getElementById("panel");
+  const tasksContainer = document.getElementById("tasks-container");
   const sectionTitle = document.getElementById("section-title");
   // Create necessary elements:
   const taskForm = document.createElement("form");
@@ -187,12 +206,25 @@ function editTaskForm(task) {
   const complete = document.createElement("select");
   const completeYes = document.createElement("option");
   const completeNo = document.createElement("option");
+  const chapter = document.createElement("select");
+  const chapters = await getChaptersForCurrentUser();
+
+  chapters.forEach((chap) => {
+    const chapterElement = document.createElement("option");
+    chapterElement.innerText = chap;
+    chapterElement.setAttribute("value", chap);
+    if (task.chapter === chap) {
+      chapterElement.setAttribute("selected", "");
+    }
+    chapter.appendChild(chapterElement);
+  });
 
   const titleLabel = document.createElement("label");
   const descriptionLabel = document.createElement("label");
   const priorityLabel = document.createElement("label");
   const dueDateLabel = document.createElement("label");
   const completeLabel = document.createElement("label");
+  const chapterLabel = document.createElement("label");
 
   const taskName = document.createElement("h1");
 
@@ -251,13 +283,15 @@ function editTaskForm(task) {
 
   completeYes.innerText = "Yes";
   completeYes.setAttribute("value", "yes");
-  
+
   if (task.complete === true) {
     completeYes.setAttribute("selected", "");
   } else {
     completeNo.setAttribute("selected", "");
   }
-  
+
+  chapterLabel.innerText = "Chapter";
+
   submitButton.setAttribute("type", "submit");
   submitButton.innerText = "Submit";
 
@@ -272,9 +306,6 @@ function editTaskForm(task) {
   description.value = task.description;
   priority.value = task.priority;
   dueDate.value = task.dueDate.toDate().toISOString().slice(0, 16); //formating it to match datetime-local format and be displayed
-  complete.value = task.complete;
-
-  // let valueForCheck = title.value;
 
   // Append elements to form:
   buttonsDiv.appendChild(cancelButton);
@@ -293,6 +324,8 @@ function editTaskForm(task) {
   complete.appendChild(completeYes);
   taskForm.appendChild(completeLabel);
   taskForm.appendChild(complete);
+  taskForm.appendChild(chapterLabel);
+  taskForm.appendChild(chapter);
   taskForm.appendChild(buttonsDiv);
 
   // Handle submit:
@@ -310,7 +343,8 @@ function editTaskForm(task) {
       description.value,
       completeValue,
       dueDate.value,
-      priority.value
+      priority.value,
+      chapter.value
     );
     /* If titles do not match, new document will be created and we will have duplicates.
     This way we prevent that: */
@@ -322,22 +356,19 @@ function editTaskForm(task) {
 
     // Reload section with changes:
     if (sectionTitle.innerText === "All Tasks") {
-      panel.innerHTML = "";
-      addTitleToSection("All Tasks", panel);
-      await loadAllTasks(panel, getTasksForCurrentUser, generateTaskElement);
+      tasksContainer.innerHTML = "";
+      await loadAllTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
     } else if (sectionTitle.innerText === "Today's Tasks") {
-      panel.innerHTML = "";
-      addTitleToSection("Today's Tasks", panel);
+      tasksContainer.innerHTML = "";
       await loadTodaysTasks(
-        panel,
+        tasksContainer,
         getTodaysTasksForCurrentUser,
         generateTaskElement
       );
     } else if (sectionTitle.innerText === "This Week") {
-      panel.innerHTML = "";
-      addTitleToSection("This Week", panel);
+      tasksContainer.innerHTML = "";
       await loadThisWeeksTasks(
-        panel,
+        tasksContainer,
         getThisWeeksTasksForCurrentUser,
         generateTaskElement
       );

@@ -109,7 +109,7 @@ async function getChaptersForCurrentUser() {
   );
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
-    chaptersArray.push(doc.data().name);
+    chaptersArray.push(doc.data().title);
   });
   return chaptersArray;
 }
@@ -183,7 +183,8 @@ async function handleTaskForm(task) {
     description: task.description,
     priority: task.priority,
     dueDate: timestamp,
-    complete: task.complete
+    complete: task.complete,
+    chapter: task.chapter
   });
 }
 
@@ -198,4 +199,11 @@ async function updateTaskCompleted(task) {
   })
 }
 
-export {handleTaskForm, deleteTask, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser, updateTaskCompleted}
+async function createChapter(chapterTitle) {
+  await setDoc(doc(db, 'Chapters', chapterTitle), {
+    title: chapterTitle,
+    userId: await getAuth().currentUser.uid
+  })
+}
+
+export {handleTaskForm, deleteTask, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser, updateTaskCompleted, createChapter, getChaptersForCurrentUser}
