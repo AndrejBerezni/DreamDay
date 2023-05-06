@@ -5,8 +5,9 @@ import {
   getTodaysTasksForCurrentUser,
   getThisWeeksTasksForCurrentUser,
   updateTaskCompleted,
+  getTasksFromChapter,
 } from "../..";
-import { loadTasks } from "./loadTasks";
+import { loadTasks, loadChapterTasks } from "./loadTasks";
 import { addTitleToSection } from "../userpage/panelheader";
 
 export default function generateTaskElement(task, container) {
@@ -91,6 +92,15 @@ export default function generateTaskElement(task, container) {
       await loadTasks(
         tasksContainer,
         getThisWeeksTasksForCurrentUser,
+        generateTaskElement
+      );
+    } else {
+      const chapter = sectionTitle.innerText
+      tasksContainer.innerHTML = "";
+      await loadChapterTasks(
+        tasksContainer,
+        getTasksFromChapter,
+        chapter,
         generateTaskElement
       );
     }

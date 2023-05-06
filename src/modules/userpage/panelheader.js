@@ -20,7 +20,6 @@ function addTitleToSection(title, container) {
   addNote.innerText = "+ Add Note";
 
   addTask.addEventListener("click", () => {
-    console.log("add task clicked");
     addTaskForm();
   });
   buttonsContainer.appendChild(addTask);

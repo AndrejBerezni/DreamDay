@@ -6,15 +6,14 @@ import {
   getTodaysTasksForCurrentUser,
   getThisWeeksTasksForCurrentUser,
   getChaptersForCurrentUser,
+  getTasksFromChapter
 } from "../..";
-import { loadTasks } from "./loadTasks";
+import { loadTasks, loadChapterTasks } from "./loadTasks";
 import { addTitleToSection } from "../userpage/panelheader";
 import generateTaskElement from "./generateTaskElement";
 
 async function addTaskForm() {
-  console.log("Task form initated");
   const panel = document.getElementById("panel");
-  const tasksContainer = document.getElementById("tasks-container");
   const sectionTitle = document.getElementById("section-title");
   // Create necessary elements:
   const taskForm = document.createElement("form");
@@ -36,7 +35,6 @@ async function addTaskForm() {
     chapter.appendChild(chapterElement);
   });
 
-  console.log(`value: ${typeof chapter.value}`);
   const titleLabel = document.createElement("label");
   const descriptionLabel = document.createElement("label");
   const priorityLabel = document.createElement("label");
@@ -156,27 +154,49 @@ async function addTaskForm() {
     document.body.removeChild(taskForm);
     // Reload section with changes:
     if (sectionTitle.innerText === "All Tasks") {
-      tasksContainer.innerHTML = "";
-      // addTitleToSection("All Tasks", tasksContainer);
+      panel.innerHTML = "";
+      addTitleToSection("All Tasks", panel);
+      const tasksContainer = document.createElement("div");
+      tasksContainer.id = "tasks-container";
+      panel.appendChild(tasksContainer);
       await loadTasks(
         tasksContainer,
         getTasksForCurrentUser,
         generateTaskElement
       );
     } else if (sectionTitle.innerText === "Today's Tasks") {
-      tasksContainer.innerHTML = "";
-      // addTitleToSection("Today's Tasks", panel);
-      await loadTodaysTasks(
+      panel.innerHTML = "";
+      addTitleToSection("Today's Tasks", panel);
+      const tasksContainer = document.createElement("div");
+      tasksContainer.id = "tasks-container";
+      panel.appendChild(tasksContainer);
+      await loadTasks(
         tasksContainer,
         getTodaysTasksForCurrentUser,
         generateTaskElement
       );
     } else if (sectionTitle.innerText === "This Week") {
-      tasksContainer.innerHTML = "";
-      // addTitleToSection("This Week", panel);
-      await loadThisWeeksTasks(
+      panel.innerHTML = "";
+      addTitleToSection("This Week", panel);
+      const tasksContainer = document.createElement("div");
+      tasksContainer.id = "tasks-container";
+      panel.appendChild(tasksContainer);
+      await loadTasks(
         tasksContainer,
         getThisWeeksTasksForCurrentUser,
+        generateTaskElement
+      );
+    } else {
+      const chapter = sectionTitle.innerText
+      panel.innerHTML = "";
+      addTitleToSection(chapter, panel);
+      const tasksContainer = document.createElement("div");
+      tasksContainer.id = "tasks-container";
+      panel.appendChild(tasksContainer);
+      await loadChapterTasks(
+        tasksContainer,
+        getTasksFromChapter,
+        chapter,
         generateTaskElement
       );
     }
@@ -192,9 +212,7 @@ async function addTaskForm() {
 }
 
 async function editTaskForm(task) {
-  console.log("Edit task form initated");
   const panel = document.getElementById("panel");
-  const tasksContainer = document.getElementById("tasks-container");
   const sectionTitle = document.getElementById("section-title");
   // Create necessary elements:
   const taskForm = document.createElement("form");
@@ -356,24 +374,49 @@ async function editTaskForm(task) {
 
     // Reload section with changes:
     if (sectionTitle.innerText === "All Tasks") {
-      tasksContainer.innerHTML = "";
+      panel.innerHTML = "";
+      addTitleToSection("All Tasks", panel);
+      const tasksContainer = document.createElement("div");
+      tasksContainer.id = "tasks-container";
+      panel.appendChild(tasksContainer);
       await loadTasks(
         tasksContainer,
         getTasksForCurrentUser,
         generateTaskElement
       );
     } else if (sectionTitle.innerText === "Today's Tasks") {
-      tasksContainer.innerHTML = "";
-      await loadTodaysTasks(
+      panel.innerHTML = "";
+      addTitleToSection("Today's Tasks", panel);
+      const tasksContainer = document.createElement("div");
+      tasksContainer.id = "tasks-container";
+      panel.appendChild(tasksContainer);
+      await loadTasks(
         tasksContainer,
         getTodaysTasksForCurrentUser,
         generateTaskElement
       );
     } else if (sectionTitle.innerText === "This Week") {
-      tasksContainer.innerHTML = "";
-      await loadThisWeeksTasks(
+      panel.innerHTML = "";
+      addTitleToSection("This Week", panel);
+      const tasksContainer = document.createElement("div");
+      tasksContainer.id = "tasks-container";
+      panel.appendChild(tasksContainer);
+      await loadTasks(
         tasksContainer,
         getThisWeeksTasksForCurrentUser,
+        generateTaskElement
+      );
+    } else {
+      const chapter = sectionTitle.innerText
+      panel.innerHTML = "";
+      addTitleToSection(chapter, panel);
+      const tasksContainer = document.createElement("div");
+      tasksContainer.id = "tasks-container";
+      panel.appendChild(tasksContainer);
+      await loadChapterTasks(
+        tasksContainer,
+        getTasksFromChapter,
+        chapter,
         generateTaskElement
       );
     }
