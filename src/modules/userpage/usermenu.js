@@ -6,15 +6,12 @@ import {
   getTodaysTasksForCurrentUser,
   getThisWeeksTasksForCurrentUser,
   getTasksFromChapter,
+  getChaptersForCurrentUser
 } from "../..";
 
 export default async function loadUserMenu(
   container,
-  getChaptersForCurrentUser,
-  panel,
-  getTasksForCurrentUser,
-  getTodaysTasksForCurrentUser,
-  getThisWeeksTasksForCurrentUser
+  panel
 ) {
   // Create elements:
   const homeButton = document.createElement("button");

@@ -9,10 +9,7 @@ export default function loadUserPage(
   getProfilePicUrl,
   getUserName,
   signOut,
-  getChaptersForCurrentUser,
-  getTasksForCurrentUser,
-  getTodaysTasksForCurrentUser,
-  getThisWeeksTasksForCurrentUser
+  getTasksForCurrentUser
 ) {
   document.body.innerHTML = "";
 
@@ -33,7 +30,7 @@ export default function loadUserPage(
   addTitleToSection('All Tasks', panel);
 
   loadUserInfo(userInfo, getProfilePicUrl, getUserName, signOut);
-  loadUserMenu(userMenu, getChaptersForCurrentUser, panel, getTasksForCurrentUser, getTodaysTasksForCurrentUser, getThisWeeksTasksForCurrentUser);
+  loadUserMenu(userMenu, panel);
   loadTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
 
   panel.appendChild(tasksContainer);

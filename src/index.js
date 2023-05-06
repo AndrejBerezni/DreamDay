@@ -67,10 +67,7 @@ function initFirebaseAuth() {
         getProfilePicUrl,
         getUserName,
         signOutUser,
-        getChaptersForCurrentUser,
-        getTasksForCurrentUser,
-        getTodaysTasksForCurrentUser,
-        getThisWeeksTasksForCurrentUser
+        getTasksForCurrentUser
       );
     } else {
       loadHome(signIn);

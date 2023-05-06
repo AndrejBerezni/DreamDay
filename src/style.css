@@ -526,6 +526,19 @@ body {
   padding: 10px 5px;
 }
 
+::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+/* ::-webkit-scrollbar-track {
+  background-color: var(--sectionBg);
+} */
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--sectionTextAccent);
+  border-radius: 5px;
+}
+
 @media (max-width: 800px) {
   #title-container {
     flex-direction: column;
@@ -534,11 +547,15 @@ body {
   #title-container > h1 {
     margin-bottom: 1.5vh;
   }
-}
 
+  #tasks-container {
+    overflow-y: auto;
+  }
+}
+/* Forms */
 /* Task Form */
 
-#task-form {
+#task-form, #chapter-form {
   position: fixed;
   top: auto;
   left: auto;
@@ -551,7 +568,7 @@ body {
   max-width: 90%;
 }
 
-#task-form > h1 {
+#task-form > h1, #chapter-form > h1 {
   text-align: center;
   font-family: var(--titleFont);
   font-weight: bold;
@@ -600,11 +617,35 @@ body {
   cursor: pointer;
 }
 
-/* Task Deletion Box */
+/* Chapter form */
+
+#chapter-form {
+  min-width: 50%;
+  position: fixed;
+  top: auto;
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sectionTextColor);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px black;
+  gap: 1.5vh;
+  }
+
+#chapter-form > h1 {
+  margin-bottom: 10px;
+};
+
+@media (max-width: 800px) {
+  #chapter-form {
+    min-width: 80%;
+  }
+}
 
 #confirm-task-deletion-box {
   position: fixed;
-  top: 40%;
+  top: auto;
   left: auto;
   display: flex;
   flex-direction: column;
@@ -614,6 +655,7 @@ body {
   border: 1px solid var(--sectionBg);
   border-radius: 5px;
   box-shadow: 0px 1px 2px black;
+  max-width: 80%;
 }
 
 #confirm-task-deletion-box > p {

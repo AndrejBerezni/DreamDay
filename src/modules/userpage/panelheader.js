@@ -1,27 +1,31 @@
 import { addTaskForm } from "../tasks/taskForm";
+import addChapterForm from "../chapters/chapterForm";
 
 function addTitleToSection(title, container) {
+  // Create elements
   const titleContainer = document.createElement("div");
   const buttonsContainer = document.createElement("div");
-
-  titleContainer.id = "title-container";
-  buttonsContainer.id = "title-buttons";
-
   const titleElement = document.createElement("h1");
   const addTask = document.createElement("button");
   const addChapter = document.createElement("button");
   const addNote = document.createElement("button");
   
-  titleElement.id = 'section-title';
-  
+  //Add attributes
+  titleContainer.id = "title-container";
+  buttonsContainer.id = "title-buttons";
+
+  titleElement.id = 'section-title'; 
   titleElement.innerText = title;
+
   addTask.innerText = "+ Add Task";
   addChapter.innerText = "+ Add Chapter";
   addNote.innerText = "+ Add Note";
 
-  addTask.addEventListener("click", () => {
-    addTaskForm();
-  });
+  //Actions on button click
+  addTask.addEventListener("click", addTaskForm);
+  addChapter.addEventListener('click', addChapterForm);
+
+  //Append elements
   buttonsContainer.appendChild(addTask);
   buttonsContainer.appendChild(addChapter);
   buttonsContainer.appendChild(addNote);
