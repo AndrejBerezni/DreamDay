@@ -112,7 +112,7 @@ async function getTasksForCurrentUser() {
   const q = query(
     collection(db, "Tasks"),
     where("userId", "==", currentUserID),
-    // orderBy('complete'),
+    orderBy('complete'),
     orderBy('dueDate')
   );
   const querySnapshot = await getDocs(q);
