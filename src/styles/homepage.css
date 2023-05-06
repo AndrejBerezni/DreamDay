@@ -1,0 +1,99 @@
+/* HOMEPAGE */
+/* NAVBAR */
+#home-background {
+    flex: 1;
+    background: url('../images/dreamdaylandingpagebg.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+  }
+  
+  #navbar {
+    height: 5vh;
+    width: 100vw;
+    background-color: var(--sectionBg);
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2vw;
+    box-shadow: 0px 1px 2px black;
+    z-index: 99;
+  }
+  
+  #nav-links {
+    display: flex;
+    gap: 2vw;
+  }
+  
+  @media (max-width: 800px) {
+    #navbar {
+      justify-content: center;
+    }
+    #nav-links {
+      gap: 5vw;
+    }
+  }
+  
+  #nav-links > button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 2.5vh;
+    font-family: var(--titleFont);
+    font-weight: bold;
+    color: var(--sectionTextColor);
+    transition: .2s;
+    text-shadow: var(--textShadow);
+  }
+  
+  #nav-links > button:hover {
+    transform: translateY(-2px);
+    color: var(--sectionTextAccent);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  /* HERO */
+  #hero-section {
+    position: absolute;
+    bottom: 0;
+    height: 25vh;
+    width: 100vw;
+    background-color: var(--sectionBgTransparent);
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    padding: 2vh 5vw;
+    font-family: var(--titleFont);
+  
+  }
+  
+  #hero-section > h1 {
+    font-size: calc(3vh + 1vw);
+    font-weight: bold;
+    color: var(--sectionTextColor);
+    font-style: italic;
+    text-shadow: var(--textShadow)
+  }
+  
+  #hero-section > p {
+    color: var(--sectionTextColor);
+    text-shadow: 1px 1px 2px black;
+  }
+  #hero-section >p:nth-of-type(1) {
+    font-size: calc(1.5vh + 1vw);
+  }
+  
+  #hero-section >p:nth-of-type(2) {
+    font-size: calc(1vh + 1vw);
+  }
+  
+  #hero-section > p > span {
+    color: var(--sectionTextAccent);
+    font-style: italic;
+  }
+  
+  #hero-section > p > span:hover {
+    transform: translateY(-2px);
+    text-decoration: underline;
+    cursor: pointer;
+  }  

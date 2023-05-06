@@ -1,0 +1,123 @@
+/* IMPORT OTHER CSS FILES */
+@import './homepage.css';
+@import './userpagelayout.css';
+@import './forms.css';
+@import './panel.css';
+@import './tasks.css';
+@import './userinfo.css';
+@import './usermenu.css';
+
+/* FONTS */
+/* Regular */
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Bold */
+  @font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  /* Italic */
+  @font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  /* Bold Italic */
+  @font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+  }
+/* Regular */
+@font-face {
+    font-family: 'Playfair Display SC';
+    src: url('../fonts/Playfair_Display_SC/PlayfairDisplaySC-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Bold */
+  @font-face {
+    font-family: 'Playfair Display SC';
+    src: url('../fonts/Playfair_Display_SC/PlayfairDisplaySC-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  /* Italic */
+  @font-face {
+    font-family: 'Playfair Display SC';
+    src: url('../fonts/Playfair_Display_SC/PlayfairDisplaySC-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+  }
+  
+  /* Bold Italic */
+  @font-face {
+    font-family: 'Playfair Display SC';
+    src: url('../fonts/Playfair_Display_SC/PlayfairDisplaySC-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+/* Meyer reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --titleFont: 'Playfair Display SC';
+  --textFont: 'PlayFair Display';
+  --sectionBg: #D34633;
+  --sectionBgTransparent: #d34633d2;
+  --sectionTextColor: #F7EACB;
+  --sectionTextAccent: #F7C855;
+  --textShadow: 1px 1px 2px black;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('../images/dreamdaylandingpagebg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

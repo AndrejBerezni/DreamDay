@@ -1,0 +1,53 @@
+/* User Info Section */
+
+#user-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 10%;
+  
+  }
+  #profile-pic {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 2px solid var(--sectionTextAccent);
+  }
+  #user-info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+  }
+  
+  #user-info-text > h1 {
+    font-family: var(--titleFont);
+    color: var(--sectionTextColor);
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: var(--textShadow);
+    text-align: end;
+  }
+  
+  #user-info-text > h1:hover {
+    cursor: default;
+  }
+  
+  #user-info-text > h2 {
+    font-family: var(--titleFont);
+    color: var(--sectionTextAccent);
+    text-align: end;
+    text-shadow: var(--textShadow);
+    transition: .2s;
+  }
+  
+  #user-info-text > h2:hover {
+    transform: translateY(-2px);
+    color: var(--sectionTextColor);
+    cursor: pointer;
+  }
+  
+  @media (max-width: 960px) {
+    #user-info-text > h1 {
+      font-size: 1.1rem;
+    }
+  }
+  
