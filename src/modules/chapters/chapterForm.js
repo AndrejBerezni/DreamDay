@@ -21,6 +21,7 @@ export default function addChapterForm() {
 
   title.setAttribute("type", "text");
   title.setAttribute("name", "chapter-title");
+  title.setAttribute("required", "");
   title.classList.add('chapter-title')
 
   buttonsDiv.id = "form-buttons-div";

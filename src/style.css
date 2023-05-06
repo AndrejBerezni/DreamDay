@@ -251,7 +251,7 @@ body {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 820px) {
   #main-container {
     width: 100vw;
     height: 100vh;
@@ -284,6 +284,7 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  gap: 10%;
 
 }
 #profile-pic {
@@ -294,7 +295,7 @@ body {
 #user-info-text {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content:center;
 }
 
 #user-info-text > h1 {
@@ -303,6 +304,7 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   text-shadow: var(--textShadow);
+  text-align: end;
 }
 
 #user-info-text > h1:hover {
@@ -321,6 +323,12 @@ body {
   transform: translateY(-2px);
   color: var(--sectionTextColor);
   cursor: pointer;
+}
+
+@media (max-width: 960px) {
+  #user-info-text > h1 {
+    font-size: 1.1rem;
+  }
 }
 
 /* User Menu Section */
@@ -643,9 +651,20 @@ body {
 
 @media (max-width: 800px) {
   #chapter-form {
-    min-width: 80%;
+    width: 80%;
   }
 }
+
+#chapter-form > label {
+  font-size: 20px;
+  text-align: center;
+}
+
+#chapter-form > input {
+  font-size: 24px;
+}
+
+/* Delete task confirmation box */
 
 #confirm-task-deletion-box {
   position: fixed;
@@ -696,3 +715,4 @@ body {
   color: var(--sectionTextColor);
   text-shadow: var(--textShadow);
 }
+
