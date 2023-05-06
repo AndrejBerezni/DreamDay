@@ -39,14 +39,19 @@ export default function generateTaskElement(task, container) {
 
   if (task.priority === "1") {
     taskPriority.style.backgroundColor = "#FF4136";
+    taskPriority.innerText = '1';
   } else if (task.priority === "2") {
     taskPriority.style.backgroundColor = "#FF851B";
+    taskPriority.innerText = '2';
   } else if (task.priority === "3") {
     taskPriority.style.backgroundColor = "#FFDC00";
+    taskPriority.innerText = '3';
   } else if (task.priority === "4") {
     taskPriority.style.backgroundColor = "#2ECC40";
+    taskPriority.innerText = '4';
   } else if (task.priority === "5") {
     taskPriority.style.backgroundColor = "#7FDBFF";
+    taskPriority.innerText = '5';
   }
 
   const taskComplete = document.createElement("icon");

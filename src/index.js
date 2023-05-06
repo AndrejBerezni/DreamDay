@@ -111,7 +111,9 @@ async function getTasksForCurrentUser() {
   const currentUserID = await getAuth().currentUser.uid;
   const q = query(
     collection(db, "Tasks"),
-    where("userId", "==", currentUserID)
+    where("userId", "==", currentUserID),
+    // orderBy('complete'),
+    orderBy('dueDate')
   );
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
@@ -130,7 +132,7 @@ const startOfToday = new Date(
 );
 const tomorrow = new Date(startOfToday.getTime() + 24 * 60 * 60 * 1000);
 const startOfWeek = new Date(
-  today.getTime() - (dayOfWeek - 1) * 24 * 60 * 60 * 1000
+  today.getTime() - dayOfWeek * 24 * 60 * 60 * 1000
 );
 const endOfWeek = new Date(
   today.getTime() + (7 - dayOfWeek) * 24 * 60 * 60 * 1000
