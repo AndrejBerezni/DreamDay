@@ -70,3 +70,10 @@
     text-shadow: var(--textShadow);
     transition: .2s;
   }
+
+  @media(max-width: 820px) {
+    #user-menu-chapters-list {
+      align-self:flex-start;
+      margin-left: 15%;
+    }
+  }

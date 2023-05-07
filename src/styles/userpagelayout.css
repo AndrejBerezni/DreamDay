@@ -10,8 +10,11 @@
   }
   
   #user-info, #user-menu, #panel {
-    background-color: var(--sectionBgTransparent);
-    border-radius: 5px;
+    background-color:  rgba( 211,70,51, 0.5); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba( 211,70,51, 0.4);
     box-shadow: 0px 1px 2px black;
   }
   #user-info {
@@ -46,7 +49,11 @@
     }
   
     #user-info, #user-menu, #panel {
-      border-radius: 0;
+      background-color:  rgba( 0,0,0, 0.4); 
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      border-radius: 10px;
+      border: 1px solid rgba( 0,0,0, 0.3); 
     }
   
     #user-info {

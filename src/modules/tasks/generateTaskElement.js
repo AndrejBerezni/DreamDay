@@ -23,6 +23,8 @@ export default function generateTaskElement(task, container) {
 
   const titleDateDiv = document.createElement("div");
   titleDateDiv.classList.add("title-date-div");
+  const priorityDateDiv = document.createElement("div");
+  priorityDateDiv.classList.add("priority-date-div");
 
   const taskTitle = document.createElement("h1");
   const taskDescription = document.createElement("p");
@@ -67,6 +69,7 @@ export default function generateTaskElement(task, container) {
   if (task.complete) {
     taskComplete.classList.add("far", "fa-check-square");
     taskComplete.style.color = "green";
+    taskComplete.style.filter = "none"
     taskTitle.style.textDecoration = "line-through";
   } else {
     taskComplete.classList.add("far", "fa-square");
@@ -156,9 +159,11 @@ export default function generateTaskElement(task, container) {
     document.body.appendChild(confirmDeletionBox);
   });
 
+  priorityDateDiv.appendChild(taskPriority);
+  priorityDateDiv.appendChild(taskDate);
   titleDateDiv.appendChild(taskTitle);
-  titleDateDiv.appendChild(taskPriority);
-  titleDateDiv.appendChild(taskDate);
+  titleDateDiv.appendChild(priorityDateDiv);
+
 
   taskDivLeft.appendChild(titleDateDiv);
   taskDivLeft.appendChild(taskDescription);
