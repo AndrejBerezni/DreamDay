@@ -72,7 +72,7 @@
   .title-date-div {
     display: flex;
     flex-wrap: no-wrap;
-    gap: 1vw;
+    gap: 8px;
     align-items: center;
     margin-bottom: 1vh;
   }

@@ -1,4 +1,4 @@
-import { editTaskForm } from "./taskForm";
+import addTaskForm from "./taskForm";
 import {
   deleteTask,
   getTasksForCurrentUser,
@@ -122,7 +122,7 @@ export default function generateTaskElement(task, container) {
     await reloadTasks();
   });
   taskEditContainer.addEventListener("click", () => {
-    editTaskForm(task);
+    addTaskForm(true, task);
   });
 
   taskDeleteContainer.addEventListener("click", () => {
