@@ -21,3 +21,5 @@ async function loadChapterTasks(
 }
 
 export {loadTasks, loadChapterTasks}
+
+// Merge these two functions into one

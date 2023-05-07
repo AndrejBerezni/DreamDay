@@ -8,10 +8,8 @@ import {
   getTasksFromChapter,
 } from "../..";
 import { loadTasks, loadChapterTasks } from "./loadTasks";
-import { addTitleToSection } from "../userpage/panelheader";
 
 export default function generateTaskElement(task, container) {
-  const panel = document.getElementById("panel");
   const tasksContainer = document.getElementById("tasks-container");
   const sectionTitle = document.getElementById("section-title");
 

@@ -6,13 +6,13 @@ import {
   getTodaysTasksForCurrentUser,
   getThisWeeksTasksForCurrentUser,
   getChaptersForCurrentUser,
-  getTasksFromChapter
+  getTasksFromChapter,
 } from "../..";
 import { loadTasks, loadChapterTasks } from "./loadTasks";
 import { addTitleToSection } from "../userpage/panelheader";
 import generateTaskElement from "./generateTaskElement";
 
-export default async function addTaskForm (isEdit, task = null) {
+export default async function addTaskForm(isEdit, task = null) {
   const panel = document.getElementById("panel");
   const sectionTitle = document.getElementById("section-title");
   // Create necessary elements:
@@ -87,7 +87,9 @@ export default async function addTaskForm (isEdit, task = null) {
   dueDate.setAttribute("type", "datetime-local");
   dueDate.setAttribute("name", "task-form-date");
   dueDate.setAttribute("required", "");
-  dueDate.value = isEdit ? task.dueDate.toDate().toISOString().slice(0, 16) : "";
+  dueDate.value = isEdit
+    ? task.dueDate.toDate().toISOString().slice(0, 16)
+    : "";
 
   dueDateLabel.setAttribute("for", "task-form-date");
   dueDateLabel.innerText = "Due Date";
@@ -158,7 +160,7 @@ export default async function addTaskForm (isEdit, task = null) {
       priority.value,
       chapter.value
     );
-        /* If titles do not match, new document will be created and we will have duplicates.
+    /* If titles do not match, new document will be created and we will have duplicates.
     This way we prevent that: */
     if (isEdit && task.title !== newTask) {
       await deleteTask(task.title);
@@ -202,7 +204,7 @@ export default async function addTaskForm (isEdit, task = null) {
         generateTaskElement
       );
     } else {
-      const chapter = sectionTitle.innerText
+      const chapter = sectionTitle.innerText;
       panel.innerHTML = "";
       addTitleToSection(chapter, panel);
       const tasksContainer = document.createElement("div");
@@ -222,5 +224,4 @@ export default async function addTaskForm (isEdit, task = null) {
   });
 
   document.body.appendChild(taskForm);
-
 }
