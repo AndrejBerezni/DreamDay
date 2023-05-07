@@ -103,7 +103,9 @@ time, mark, audio, video {
   --titleFont: 'Playfair Display SC';
   --textFont: 'PlayFair Display';
   --sectionBg: #D34633;
-  --sectionBgTransparent: #d34633d2;
+  --sectionBgGlassD: rgba( 211,70,51, 0.5);
+  --sectionBgGlassM: rgba( 0,0,0, 0.4);
+  --glassLightBg: rgba( 247,234,203, 0.7);
   --sectionTextColor: #F7EACB;
   --sectionTextAccent: #F7C855;
   --textShadow: 1px 1px 2px black;

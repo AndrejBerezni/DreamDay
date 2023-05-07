@@ -4,12 +4,11 @@
     margin-bottom: 1vh;
     display: flex;
     padding: 10px;
-    background-color: rgba( 247,234,203, 0.7);;
-    border-radius: 5px;
-    /* box-shadow: 0px 1px 2px black; */
-    border: 1px solid rgba( 247,234,203, 0.4); 
-    font-family: var(--textFont);
     transition: .2s;
+    font-family: var(--textFont);
+    background-color: var(--glassLightBg);
+    border-radius: 5px;
+    border: 1px solid var(--glassLightBg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
