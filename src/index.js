@@ -16,6 +16,7 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
 } from "firebase/auth";
 
@@ -49,11 +50,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
 
 // Firebase Authentication
 async function signIn() {
-  const provider = new GoogleAuthProvider();
-  await signInWithPopup(getAuth(), provider);
+  
+  await signInWithRedirect(auth, provider);
 }
 
 function signOutUser() {
