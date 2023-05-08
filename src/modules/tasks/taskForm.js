@@ -162,7 +162,7 @@ export default async function addTaskForm(isEdit, task = null) {
     );
     /* If titles do not match, new document will be created and we will have duplicates.
     This way we prevent that: */
-    if (isEdit && task.title !== newTask) {
+    if (isEdit && task.title !== newTask.title) {
       await deleteTask(task.title);
     }
 

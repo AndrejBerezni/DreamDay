@@ -158,8 +158,48 @@
     text-shadow: var(--textShadow);
   }
 
+/* Note form */
+
+#note-form {
+  position: fixed;
+  top: auto;
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0px 1px 2px black;
+  max-width: 80%;
+  background-color: var(--glassLightBg);
+  border-radius: 5px;
+  border: 1px solid var(--glassLightBg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  gap: 10px;
+}
+
+#note-form > label {
+  font-family: var(--titleFont);
+  text-align: center;
+}
+
+#note-form > input {
+  max-width: 50%;
+  font-size: 1.5rem;
+  align-self: center;
+  border-radius: 5px;
+  border: none;
+  font-family: var(--textFont);
+  text-align: center;
+}
+
+#note-form > textarea {
+  border-radius: 5px;
+  border: none;
+  font-family: var(--textFont);
+}
+
 @media (max-width: 820px) {
-  #task-form, #chapter-form, #confirm-task-deletion-box {
+  #task-form, #chapter-form, #confirm-task-deletion-box, #note-form {
     background-color: var(--sectionBgGlassM);
     border-radius: 5px;
     border: 1px solid var(--sectionBgGlassM);
@@ -169,3 +209,4 @@
     color: white;
   }
 }
+

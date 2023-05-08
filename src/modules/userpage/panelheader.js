@@ -1,5 +1,6 @@
 import addTaskForm from "../tasks/taskForm";
 import addChapterForm from "../chapters/chapterForm";
+import noteForm from "../notes/noteForm";
 
 function addTitleToSection(title, container) {
   // Create elements
@@ -26,6 +27,9 @@ function addTitleToSection(title, container) {
     addTaskForm(false)
   });
   addChapter.addEventListener('click', addChapterForm);
+  addNote.addEventListener('click', () => {
+    noteForm(false);
+  })
 
   //Append elements
   buttonsContainer.appendChild(addTask);

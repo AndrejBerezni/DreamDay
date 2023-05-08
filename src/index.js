@@ -1,6 +1,7 @@
 import "./styles/style.css";
 import loadHome from "./modules/homepage/homepage";
 import loadUserPage from "./modules/userpage/userpage";
+import noteForm from "./modules/notes/noteForm";
 
 // Font awesome:
 import "@fortawesome/fontawesome-free/js/fontawesome";
@@ -55,7 +56,6 @@ const auth = getAuth();
 
 // Firebase Authentication
 async function signIn() {
-  
   await signInWithRedirect(auth, provider);
 }
 
@@ -115,8 +115,8 @@ async function getTasksForCurrentUser() {
   const q = query(
     collection(db, "Tasks"),
     where("userId", "==", currentUserID),
-    orderBy('complete'),
-    orderBy('dueDate')
+    orderBy("complete"),
+    orderBy("dueDate")
   );
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
@@ -134,9 +134,7 @@ const startOfToday = new Date(
   today.getDate()
 );
 const tomorrow = new Date(startOfToday.getTime() + 24 * 60 * 60 * 1000);
-const startOfWeek = new Date(
-  today.getTime() - dayOfWeek * 24 * 60 * 60 * 1000
-);
+const startOfWeek = new Date(today.getTime() - dayOfWeek * 24 * 60 * 60 * 1000);
 const endOfWeek = new Date(
   today.getTime() + (7 - dayOfWeek) * 24 * 60 * 60 * 1000
 );
@@ -222,8 +220,20 @@ async function updateTaskCompleted(task) {
 async function createChapter(chapterTitle) {
   await setDoc(doc(db, "Chapters", chapterTitle), {
     title: chapterTitle,
-    userId: await getAuth().currentUser.uid,
+    userId: await getAuth().currentUser.uid
   });
+}
+
+async function createNote(note) {
+  await setDoc(doc(db, 'Notes', note.title), {
+    title: note.title,
+    text: note.text,
+    userId: await getAuth().currentUser.uid
+  })
+}
+
+async function deleteNote(noteTitle) {
+  await deleteDoc(doc(db, "Tasks", noteTitle));
 }
 
 export {
@@ -234,6 +244,8 @@ export {
   getThisWeeksTasksForCurrentUser,
   updateTaskCompleted,
   createChapter,
+  createNote,
+  deleteNote,
   getChaptersForCurrentUser,
-  getTasksFromChapter
+  getTasksFromChapter,
 };
