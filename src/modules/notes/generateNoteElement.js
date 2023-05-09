@@ -1,5 +1,6 @@
 import { deleteNote } from "../..";
 import noteForm from "./noteForm";
+import loadNotes from "./loadNotes";
 
 export default function generateNoteElement(note, container) {
   // Create elements
@@ -14,7 +15,7 @@ export default function generateNoteElement(note, container) {
 
   // Add attributes
   noteDiv.classList.add("note-div");
-
+  buttonsDiv.classList.add("note-buttons");
   noteTitle.innerText = note.title;
   noteText.innerText = note.text;
 
@@ -48,7 +49,9 @@ export default function generateNoteElement(note, container) {
     confirmDeletionButton.addEventListener("click", async () => {
       await deleteNote(note.title);
       document.body.removeChild(confirmDeletionBox);
-      //   Add reload of notes
+      const notesContainer = document.getElementById('notes-container');
+      notesContainer.innerHTML = "";
+      await loadNotes(notesContainer);
     });
 
     deletionButtonsDiv.appendChild(cancelDeletionButton);

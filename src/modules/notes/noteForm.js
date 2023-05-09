@@ -1,5 +1,6 @@
 import Note from "../noteClass";
 import { createNote, deleteNote } from "../..";
+import loadNotes from "./loadNotes";
 
 export default function noteForm(isEdit, note = null) {
   // Create elements
@@ -55,6 +56,11 @@ export default function noteForm(isEdit, note = null) {
     }
     await createNote(newNote);
     document.body.removeChild(form);
+
+    // Reload notes
+    const notesContainer = document.getElementById('notes-container');
+    notesContainer.innerHTML = "";
+    await loadNotes(notesContainer);
   });
 
   cancelButton.addEventListener("click", () => {

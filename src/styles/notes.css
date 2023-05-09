@@ -1,0 +1,53 @@
+#notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.note-div {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: space-between;
+ font-family: var(--textFont);
+ background-color: var(--glassLightBg);
+ border-radius: 5px;
+ border: 1px solid var(--glassLightBg);
+ backdrop-filter: blur(10px);
+ -webkit-backdrop-filter: blur(10px);
+ padding: 20px;
+ gap: 20px;
+ min-width: 200px;
+}
+
+.note-div > h1 {
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.note-div > p {
+    line-height: 2;
+    word-spacing: 3px;
+    text-align: justify;
+}
+
+.note-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.note-buttons svg {
+    color: var(--sectionBg);
+    transition: .2s;
+    color: var(--sectionTextAccent);
+    filter: drop-shadow(1px 1px 1px black);
+  }
+  
+.note-buttons svg:hover {
+    cursor: pointer;
+    transform: scale(1.2) rotate(10deg);
+  }

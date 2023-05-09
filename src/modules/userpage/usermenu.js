@@ -1,18 +1,16 @@
 import generateTaskElement from "../tasks/generateTaskElement";
 import { loadTasks, loadChapterTasks } from "../tasks/loadTasks";
+import loadNotes from "../notes/loadNotes";
 import { addTitleToSection } from "./panelheader";
 import {
   getTasksForCurrentUser,
   getTodaysTasksForCurrentUser,
   getThisWeeksTasksForCurrentUser,
   getTasksFromChapter,
-  getChaptersForCurrentUser
+  getChaptersForCurrentUser,
 } from "../..";
 
-export default async function loadUserMenu(
-  container,
-  panel
-) {
+export default async function loadUserMenu(container, panel) {
   // Create elements:
   const homeButton = document.createElement("button");
   const todayButton = document.createElement("button");
@@ -98,7 +96,11 @@ export default async function loadUserMenu(
     const tasksContainer = document.createElement("div");
     tasksContainer.id = "tasks-container";
     panel.appendChild(tasksContainer);
-    await loadTasks(tasksContainer, getTasksForCurrentUser, generateTaskElement);
+    await loadTasks(
+      tasksContainer,
+      getTasksForCurrentUser,
+      generateTaskElement
+    );
   });
 
   todayDiv.addEventListener("click", async () => {
@@ -107,7 +109,11 @@ export default async function loadUserMenu(
     const tasksContainer = document.createElement("div");
     tasksContainer.id = "tasks-container";
     panel.appendChild(tasksContainer);
-    await loadTasks(tasksContainer, getTodaysTasksForCurrentUser, generateTaskElement);
+    await loadTasks(
+      tasksContainer,
+      getTodaysTasksForCurrentUser,
+      generateTaskElement
+    );
   });
 
   thisWeekDiv.addEventListener("click", async () => {
@@ -121,6 +127,15 @@ export default async function loadUserMenu(
       getThisWeeksTasksForCurrentUser,
       generateTaskElement
     );
+  });
+
+  notesDiv.addEventListener("click", async () => {
+    panel.innerHTML = "";
+    addTitleToSection("Notes", panel);
+    const notesContainer = document.createElement("div");
+    notesContainer.id = "notes-container";
+    panel.appendChild(notesContainer);
+    await loadNotes(notesContainer);
   });
 
   homeDiv.appendChild(homeIcon);

@@ -247,7 +247,7 @@ async function createNote(note) {
 }
 
 async function deleteNote(noteTitle) {
-  await deleteDoc(doc(db, "Tasks", noteTitle));
+  await deleteDoc(doc(db, "Notes", noteTitle));
 }
 
 export {
