@@ -25,5 +25,5 @@ Dream Day is licensed under the [MIT License](https://opensource.org/license/mit
 Live Website
 Check out the live website [here](https://dream-day-658b0.web.app/).
 
-##Preview
+## Preview
 ![Dream day preview](/src/images/ghpreview.png)
