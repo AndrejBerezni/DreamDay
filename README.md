@@ -1,5 +1,5 @@
 # Dream Day
-Dream Day is a wedding day planner that allows you to create and organize tasks for your special day. The project was built using **JavaScript, HTML,** and **CSS** on the front end, with **Webpack used** to bundle the code, and **Firebase** in the back end. Firebase's **Firestore** was used to store data in a non-relational database, and **Firebase authentication** was used to allow users to sign in using their Google account. Background images were generated using **Midjourney**.
+Dream Day is a wedding day planner that allows you to create and organize tasks for your special day. The project was built using **JavaScript, HTML,** and **CSS** on the front end, with **Webpack** used to bundle the code, and **Firebase** in the back end. Firebase's **Firestore** was used to store data in a non-relational database, and **Firebase authentication** was used to allow users to sign in using their **Google** account. Background images were generated using **Midjourney**.
 
 ## Features
 - Create tasks and organize them into chapters
