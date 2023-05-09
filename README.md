@@ -19,10 +19,10 @@ If you'd like to contribute to Dream Day, feel free to open a pull request or su
 ## Credits
 *Favicon:* Wedding icons created by IconMarketPK - [Flaticon](https://www.flaticon.com/free-icons/wedding)
 
-License
+## License
 Dream Day is licensed under the [MIT License](https://opensource.org/license/mit/).
 
-Live Website
+## Live Website
 Check out the live website [here](https://dream-day-658b0.web.app/).
 
 ## Preview
