@@ -183,7 +183,7 @@
 }
 
 #note-form > input {
-  max-width: 50%;
+  min-width: 50%;
   font-size: 1.5rem;
   align-self: center;
   border-radius: 5px;

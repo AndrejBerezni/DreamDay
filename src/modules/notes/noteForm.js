@@ -6,6 +6,7 @@ export default function noteForm(isEdit, note = null) {
   const form = document.createElement("form");
   const titleLabel = document.createElement("label");
   const title = document.createElement("input");
+  const textLabel = document.createElement("label");
   const text = document.createElement("textarea");
   const buttonsDiv = document.createElement("div");
   const submitButton = document.createElement("button");
@@ -20,12 +21,21 @@ export default function noteForm(isEdit, note = null) {
   title.value = isEdit ? note.title : "";
   title.setAttribute("name", "note-form-title");
   title.setAttribute("type", "text");
+  title.setAttribute("required", "");
   title.id = "note-form-title";
 
+  textLabel.innerText = "Text";
+  textLabel.setAttribute("for", "note-form-title");
+
+  text.value = isEdit ? note.text : "";
+  if (!isEdit) {
+    text.setAttribute("placeholder", "Write your note here...");
+  }
   text.setAttribute("name", "note-form-text");
   text.setAttribute("rows", "10");
   text.setAttribute("cols", "40");
-  text.value = isEdit ? note.text : "";
+  text.setAttribute("required", "");
+  text.id = "note-form-text";
 
   buttonsDiv.id = "form-buttons-div";
 
@@ -57,6 +67,7 @@ export default function noteForm(isEdit, note = null) {
 
   form.appendChild(titleLabel);
   form.appendChild(title);
+  form.appendChild(textLabel);
   form.appendChild(text);
   form.appendChild(buttonsDiv);
 

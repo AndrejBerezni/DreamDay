@@ -186,6 +186,20 @@ async function getTasksFromChapter(chapter) {
   return tasksArray;
 }
 
+async function getNotesForCurrentUser() {
+  let notesArray = [];
+  const currentUserID = await getAuth().currentUser.uid;
+  const q = query(
+    collection(db, "Notes"),
+    where("userId", "==", currentUserID)
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    notesArray.push(doc.data());
+  });
+  return notesArray;
+}
+
 // Write data
 
 /*According to the Firebase documentation, if document already exists,
@@ -248,4 +262,5 @@ export {
   deleteNote,
   getChaptersForCurrentUser,
   getTasksFromChapter,
+  getNotesForCurrentUser
 };
