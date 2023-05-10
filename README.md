@@ -17,7 +17,9 @@ To use Dream Day, sign in using your Google account and start creating tasks. Yo
 If you'd like to contribute to Dream Day, feel free to open a pull request or submit an issue.
 
 ## Credits
-*Favicon:* Wedding icons created by IconMarketPK - [Flaticon](https://www.flaticon.com/free-icons/wedding)
+- *Favicon:* Wedding icons created by IconMarketPK - [Flaticon](https://www.flaticon.com/free-icons/wedding)
+- Guide created using [Scribe](https://scribehow.com/)
+
 
 ## License
 Dream Day is licensed under the [MIT License](https://opensource.org/license/mit/).
